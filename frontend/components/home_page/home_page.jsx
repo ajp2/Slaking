@@ -17,6 +17,9 @@ export class HomePage extends Component {
     const sessionLinks = () => (
       <ul className='nav-list'>
         <li>
+          <button onClick={this.props.loginAsGuest}>Login As Guest</button>
+        </li>
+        <li>
           <Link to='/login'>Login</Link>
         </li>
         <li>

@@ -1,6 +1,9 @@
 class Api::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
+    @user.password = 'password123' if @user.username == 'guest'
+    puts "------------------------------"
+    puts @user
     if @user.save
       login!(@user)
       render :show
