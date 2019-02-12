@@ -20,6 +20,19 @@ export class SessionForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    let user;
+    if (this.props.formType === 'login') {
+      user = {
+        username: this.state.username,
+        password: this.state.password
+      };
+    } else {
+      user = this.state;
+    }
+
+    this.props.processForm(user)
+      .then(() => this.props.history.push('/'));
   }
 
   render() {
