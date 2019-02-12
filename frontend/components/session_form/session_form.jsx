@@ -32,7 +32,7 @@ export class SessionForm extends Component {
     }
 
     this.props.processForm(user)
-      .then(() => this.props.history.push('/'));
+      .then(() => this.props.history.push('/messages'));
   }
 
   render() {

@@ -7,17 +7,23 @@ export class HomePage extends Component {
     super(props);
 
     this.messagesRedirect = this.messagesRedirect.bind(this);
+    this.guestLogin = this.guestLogin.bind(this);
   }
 
   messagesRedirect(e) {
-    this.props.history.push("/messages");
+    this.props.history.push('/messages');
+  }
+
+  guestLogin(e) {
+    this.props.loginAsGuest()
+      .then(() => this.props.history.push('/messages'));
   }
 
   render() {    
     const sessionLinks = () => (
       <ul className='nav-list'>
         <li>
-          <button onClick={this.props.loginAsGuest}>Login As Guest</button>
+          <button onClick={this.guestLogin}>Login As Guest</button>
         </li>
         <li>
           <Link to='/login'>Login</Link>
@@ -29,7 +35,7 @@ export class HomePage extends Component {
     );
 
     const logout = () => (
-      <ul className="nav-list">
+      <ul className='nav-list'>
         <li>Welcome, {this.props.currentUser.username}</li>
         <li>
           <button onClick={this.props.logout}>Logout</button>
