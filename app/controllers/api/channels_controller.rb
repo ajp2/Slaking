@@ -1,4 +1,6 @@
 class Api::ChannelsController < ApplicationController
+  before_action :require_logged_in
+  
   def create
     @channel = Channel.new(channel_params)
     if @channel.save

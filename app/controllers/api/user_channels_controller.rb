@@ -1,4 +1,6 @@
 class UserChannelsController < ApplicationController
+  before_action :require_logged_in
+
   def create
     @user_channel = UserChannel.new(user_channel_params)
     if @user_channel.save
