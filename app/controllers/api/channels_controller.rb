@@ -2,7 +2,7 @@ class ChannelsController < ApplicationController
   def create
     @channel = Channel.new(channel_params)
     if @channel.save
-      render json: @channel
+      render :show
     else
       render json: @channel.errors.full_messages, status: 422
     end
@@ -10,13 +10,13 @@ class ChannelsController < ApplicationController
 
   def index
     @channels = Channel.all
-    render json: @channels
+    render :index
   end
 
   def update
     @channel = Channel.find(params[:id])
     if @channel.update(channel_params)
-      render json: @channel
+      render :show
     else
       render json: @channel.errors.full_messages, status: 422
     end
@@ -26,6 +26,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.find(params[:id])
     if @channel
       @channel.destroy
+      render json: {}
     else
       render json: ["Channel does not exist"], status: 404
     end
