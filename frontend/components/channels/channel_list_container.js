@@ -4,7 +4,8 @@ import {
   fetchChannels, 
   createChannel, 
   editChannel, 
-  deleteChannel 
+  deleteChannel ,
+  createUserChannel
 } from '../../actions/channel_actions';
 import { fetchUsers, fetchCurrentUser } from '../../actions/session_actions';
 import { selectAllChannels, selectUserChannels } from '../../reducers/selectors';
@@ -18,7 +19,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchChannels: () => dispatch(fetchChannels()),
   fetchUsers: () => dispatch(fetchUsers()),
-  fetchCurrentUser: () => dispatch(fetchCurrentUser())
+  fetchCurrentUser: () => dispatch(fetchCurrentUser()),
+  createUserChannel: userChannel => dispatch(createUserChannel(userChannel))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelList);
