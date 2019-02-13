@@ -6,14 +6,19 @@ import {
   editChannel, 
   deleteChannel 
 } from '../../actions/channel_actions';
-import { selectAllChannels } from '../../reducers/selectors';
+import { fetchUsers, fetchCurrentUser } from '../../actions/session_actions';
+import { selectAllChannels, selectUserChannels } from '../../reducers/selectors';
 
 const mapStateToProps = state => ({
-  channels: selectAllChannels(state)
+  currentUser: state.entities.users[state.session.id],
+  channels: selectAllChannels(state),
+  userChannels: selectUserChannels(state, state.session.id)
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchChannels: () => dispatch(fetchChannels())
+  fetchChannels: () => dispatch(fetchChannels()),
+  fetchUsers: () => dispatch(fetchUsers()),
+  fetchCurrentUser: () => dispatch(fetchCurrentUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelList);
