@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import ChannelFormContainer from './channel_form_container';
+
 export class ChannelList extends Component {
   componentDidMount() {
     this.props.fetchChannels();
@@ -10,7 +12,6 @@ export class ChannelList extends Component {
     const { channels, currentUser, userChannels } = this.props;
     if (channels && channels.length === 0) return null;
     if (!userChannels) return null;
-    console.log(this.props.userChannels);
 
     return (
       <div>
@@ -22,6 +23,8 @@ export class ChannelList extends Component {
         <ul>
           {userChannels.map((channel, idx) => <li key={idx}>{channel.name}</li>)}
         </ul>
+
+        <ChannelFormContainer />
       </div>
     )
   }

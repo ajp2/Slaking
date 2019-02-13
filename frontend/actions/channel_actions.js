@@ -4,6 +4,9 @@ export const RECEIVE_CHANNELS = 'RECEIVE_CHANNELS';
 export const RECEIVE_CHANNEL = 'RECEIVE_CHANNEL';
 export const REMOVE_CHANNEL = 'REMOVE_CHANNEL';
 
+export const RECEIVE_USER_CHANNEL = 'RECEIVE_USER_CHANNEL';
+export const REMOVE_USER_CHANNEL = 'REMOVE_USER_CHANNEL';
+
 export const receiveChannels = channels => ({
   type: RECEIVE_CHANNELS,
   channels
@@ -14,10 +17,12 @@ export const receiveChannel = channel => ({
   channel
 });
 
-export const removeChannel = (id) => ({
+export const removeChannel = id => ({
   type: REMOVE_CHANNEL,
   id
 });
+
+export const receiveUserChannel = 
 
 export const fetchChannels = () => dispatch => ChannelAPIUtil.fetchChannels()
   .then(channels => dispatch(receiveChannels(channels)));
