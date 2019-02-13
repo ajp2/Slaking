@@ -1,4 +1,4 @@
-class MessagesController < ApplicationController
+class Api::MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     if @message.save
@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
   end
 
   def index
-    @messages = Message.where(channel_id: params[:chanellId])
+    @messages = Message.where(channel_id: params[:channelId])
     render :index
   end
 
@@ -28,7 +28,7 @@ class MessagesController < ApplicationController
       @message.destroy
       render json: {}
     else
-      render json: ["Message does not exist"], status 404
+      render json: ["Message does not exist"], status: 404
     end
   end
 
