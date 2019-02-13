@@ -33,7 +33,7 @@ export const fetchChannels = () => dispatch => ChannelAPIUtil.fetchChannels()
 export const createChannel = formChannel => dispatch => ChannelAPIUtil.createChannel(formChannel)
   .then(channel => dispatch(receiveChannel(channel)));
 
-export const editChannel = formChannel => dispatch => ChannelAPIUtil.editChannel(formChannel)
+export const editChannel = (formChannel, id) => dispatch => ChannelAPIUtil.editChannel(formChannel, id)
   .then(channel => dispatch(receiveChannel(channel)));
 
 export const deleteChannel = id => dispatch => ChannelAPIUtil.deleteChannel(id)
