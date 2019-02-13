@@ -22,8 +22,17 @@ export class ChannelForm extends Component {
       ...this.state,
       owner_id: this.props.currentUserId
     };
-    
-    this.props.createChannel(channel);
+
+    this.props.createChannel(channel)
+      .then(action => {
+        const userChannel = {
+          user_id: this.props.currentUserId,
+          channel_id: action.channel.id
+        };
+        this.props.createUserChannel(userChannel);
+
+        this.setState({ name: "", description: "" });
+      });
   }
 
   render() {

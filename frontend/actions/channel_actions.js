@@ -22,7 +22,10 @@ export const removeChannel = id => ({
   id
 });
 
-export const receiveUserChannel = 
+export const receiveUserChannel = userChannel => ({
+  type: RECEIVE_USER_CHANNEL,
+  userChannel
+});
 
 export const fetchChannels = () => dispatch => ChannelAPIUtil.fetchChannels()
   .then(channels => dispatch(receiveChannels(channels)));
@@ -35,3 +38,6 @@ export const editChannel = formChannel => dispatch => ChannelAPIUtil.editChannel
 
 export const deleteChannel = id => dispatch => ChannelAPIUtil.deleteChannel(id)
   .then(() => dispatch(deleteChannel(id)));
+
+export const createUserChannel = formUserChannel => dispatch => ChannelAPIUtil.createUserChannel(formUserChannel)
+  .then(userChannel => dispatch(receiveUserChannel(userChannel)));

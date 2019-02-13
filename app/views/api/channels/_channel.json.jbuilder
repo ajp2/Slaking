@@ -1,1 +1,1 @@
-json.extract! channel, :name, :description, :private, :owner_id, :created_at
+json.extract! channel, :id, :name, :description, :private, :owner_id, :created_at

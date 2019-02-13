@@ -1,4 +1,4 @@
-class UserChannelsController < ApplicationController
+class Api::UserChannelsController < ApplicationController
   before_action :require_logged_in
 
   def create
@@ -23,6 +23,6 @@ class UserChannelsController < ApplicationController
 
   private
   def user_channel_params
-    params.require(:user_channel).permit(:user_id, :channel_id)
+    params.require(:userChannel).permit(:user_id, :channel_id)
   end
 end
