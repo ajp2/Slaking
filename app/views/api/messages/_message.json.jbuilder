@@ -1,0 +1,1 @@
+json.extract! user, :id, :content, :created_at

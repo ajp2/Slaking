@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   def create
     @message = Message.new(message_params)
     if @message.save
-      render json: @message
+      render :show
     else
       render json: @message.errors.full_messages, status: 422
     end
@@ -10,13 +10,13 @@ class MessagesController < ApplicationController
 
   def index
     @messages = Message.where(channel_id: params[:chanellId])
-    render json: @messages
+    render :index
   end
 
   def update
     @message = Message.find(params[:id])
     if @message.update(message_params)
-      render json: @message
+      render :show
     else
       render json: @message.errors.full_messages, status: 422
     end
@@ -26,6 +26,7 @@ class MessagesController < ApplicationController
     @message = Message.find(params[:id])
     if @message
       @message.destroy
+      render json: {}
     else
       render json: ["Message does not exist"], status 404
     end
