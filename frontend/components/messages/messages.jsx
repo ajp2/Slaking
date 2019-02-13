@@ -6,7 +6,7 @@ export class Messages extends Component {
   render() {
     return (
       <div>
-        <ChannelListContainer />
+        <h1>Messsages</h1>
       </div>
     )
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ChannelFormContainer from './channel_form_container';
+import Messages from '../messages/messages';
 
 export class ChannelList extends Component {
   constructor(props) {
@@ -45,6 +46,7 @@ export class ChannelList extends Component {
         </ul>
 
         <ChannelFormContainer />
+        <Messages />
       </div>
     )
   }
