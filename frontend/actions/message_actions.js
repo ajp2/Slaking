@@ -1,6 +1,6 @@
 import * as MessageAPIUtil from '../util/message_api_util';
 
-export const RECEIVE_MESSAGES = 'RECEIVE_MESSAGE';
+export const RECEIVE_MESSAGES = 'RECEIVE_MESSAGES';
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
 

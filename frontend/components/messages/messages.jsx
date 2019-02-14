@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import ChannelListContainer from '../channels/channel_list_container';
+import MessageForm from '../messages/message_form';
 
 export class Messages extends Component {
   constructor(props) {
@@ -29,6 +29,11 @@ export class Messages extends Component {
         <ul>
           {messages.map((message, idx) => <li key={idx}>{message.content}</li>)}
         </ul>
+        <MessageForm 
+          createMessage={this.props.createMessage} 
+          currentUser={this.props.currentUser}
+          channelId={this.channelId}
+        />
       </div>
     )
   }
