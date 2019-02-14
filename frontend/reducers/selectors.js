@@ -8,3 +8,7 @@ export const selectUserChannels = (state, userId) => {
     return channelIds.map(id => state.entities.channels[id]);
   }
 };
+
+export const selectAllMessages = state => (
+  Object.values(state.entities.messages)
+);

@@ -2,7 +2,7 @@ import {
   RECEIVE_MESSAGES,
   RECEIVE_MESSAGE,
   REMOVE_MESSAGE
-} from "../../actions/messgae_actions";
+} from "../../actions/message_actions";
 import { merge } from "lodash";
 
 const messagesReducer = (state = {}, action) => {

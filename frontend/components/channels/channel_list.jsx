@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Link, Route } from 'react-router-dom';
 
 import ChannelFormContainer from './channel_form_container';
-import Messages from '../messages/messages';
+import MessagesContainer from '../messages/messages_container';
 
 export class ChannelList extends Component {
   constructor(props) {
@@ -42,11 +43,11 @@ export class ChannelList extends Component {
         </ul>
         <h2>User Channels</h2>
         <ul>
-          {userChannels.map((channel, idx) => <li key={idx}>{channel.name}</li>)}
+          {userChannels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}>{channel.name}</Link></li>)}
         </ul>
 
         <ChannelFormContainer />
-        <Messages />
+        <Route path='/messages/:channelId' component={MessagesContainer} />
       </div>
     )
   }
