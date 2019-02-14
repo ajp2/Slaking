@@ -21,6 +21,14 @@ export class Messages extends Component {
   }
 
   render() {
+    // action cable
+    App.cable.subscriptions.create({
+      channel: 'MessagesChannel',
+      channel_room: this.channelId
+    }, {
+      received: data => console.log(data)
+    });
+
     const { messages } = this.props;
 
     return (
