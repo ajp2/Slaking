@@ -11,6 +11,7 @@ export class Messages extends Component {
   componentDidMount() {
     this.channelId = this.props.match.params.channelId;
     this.props.fetchMessages(this.channelId);
+    this.createSocket();
   }
 
   componentDidUpdate(prevProps) {
@@ -20,15 +21,16 @@ export class Messages extends Component {
     }
   }
 
-  render() {
-    // action cable
-    App.cable.subscriptions.create({
+  createSocket() {
+    this.socket = App.cable.subscriptions.create({
       channel: 'MessagesChannel',
       channel_room: this.channelId
     }, {
-      received: data => console.log(data)
-    });
+        received: data => this.props.receiveMessage(data),
+      });
+  }
 
+  render() {
     const { messages } = this.props;
 
     return (

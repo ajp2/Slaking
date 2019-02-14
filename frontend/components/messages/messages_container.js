@@ -1,16 +1,18 @@
 import { connect } from 'react-redux';
 import Messages from './messages';
-import { fetchMessages, createMessage } from '../../actions/message_actions';
+import { fetchMessages, receiveMessage } from '../../actions/message_actions';
+import { createMessage } from '../../util/message_api_util';
 import { selectAllMessages } from '../../reducers/selectors';
 
 const mapStateToProps = state => ({
   messages: selectAllMessages(state),
-  currentUser: state.session.id
+  currentUser: state.session.id,
+  createMessage: message => createMessage(message)
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchMessages: id => dispatch(fetchMessages(id)),
-  createMessage: message => dispatch(createMessage(message))
+  receiveMessage: message => dispatch(receiveMessage(message))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Messages);
