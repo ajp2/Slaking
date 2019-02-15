@@ -24,10 +24,10 @@ export class ChannelForm extends Component {
     };
 
     this.props.createChannel(channel)
-      .then(action => {
+      .then(res => {
         const userChannel = {
-          user_id: this.props.currentUserId,
-          channel_id: action.channel.id
+          user_id: res.owner_id,
+          channel_id: res.id
         };
         this.props.createUserChannel(userChannel);
 

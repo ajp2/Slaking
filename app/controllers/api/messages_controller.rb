@@ -39,7 +39,6 @@ class Api::MessagesController < ApplicationController
   end
 
   def message_cable(message)
-    puts "function"
     ActionCable.server.broadcast(
       "messages#{message.channel_id}",
       content: message.content,

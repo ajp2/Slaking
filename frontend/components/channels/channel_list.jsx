@@ -7,7 +7,6 @@ import MessagesContainer from '../messages/messages_container';
 export class ChannelList extends Component {
   constructor(props) {
     super(props);
-
   }
 
   joinChannel(channelId) {
@@ -21,6 +20,15 @@ export class ChannelList extends Component {
   componentDidMount() {
     this.props.fetchChannels();
     this.props.fetchUsers().then(this.props.fetchCurrentUser);
+    this.createSocket();
+  }
+
+  createSocket() {
+    this.socket = App.cable.subscriptions.create({
+      channel: 'ThreadsChannel'
+    }, {
+        received: data => this.props.receiveChannel(data),
+      });
   }
 
   render() {

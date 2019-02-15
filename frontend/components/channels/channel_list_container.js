@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import ChannelList from './channel_list';
 import { 
   fetchChannels, 
-  createChannel, 
+  receiveChannel, 
   editChannel, 
   deleteChannel ,
   createUserChannel
@@ -20,7 +20,8 @@ const mapDispatchToProps = dispatch => ({
   fetchChannels: () => dispatch(fetchChannels()),
   fetchUsers: () => dispatch(fetchUsers()),
   fetchCurrentUser: () => dispatch(fetchCurrentUser()),
-  createUserChannel: userChannel => dispatch(createUserChannel(userChannel))
+  createUserChannel: userChannel => dispatch(createUserChannel(userChannel)),
+  receiveChannel: channel => dispatch(receiveChannel(channel))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelList);

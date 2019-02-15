@@ -30,8 +30,8 @@ export const receiveUserChannel = userChannel => ({
 export const fetchChannels = () => dispatch => ChannelAPIUtil.fetchChannels()
   .then(channels => dispatch(receiveChannels(channels)));
 
-export const createChannel = formChannel => dispatch => ChannelAPIUtil.createChannel(formChannel)
-  .then(channel => dispatch(receiveChannel(channel)));
+// export const createChannel = formChannel => dispatch => ChannelAPIUtil.createChannel(formChannel)
+//   .then(channel => dispatch(receiveChannel(channel)));
 
 export const editChannel = (formChannel, id) => dispatch => ChannelAPIUtil.editChannel(formChannel, id)
   .then(channel => dispatch(receiveChannel(channel)));

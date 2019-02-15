@@ -4,6 +4,7 @@ class Api::ChannelsController < ApplicationController
   def create
     @channel = Channel.new(channel_params)
     if @channel.save
+      channel_cable(@channel)
       render :show
     else
       render json: @channel.errors.full_messages, status: 422
@@ -37,5 +38,16 @@ class Api::ChannelsController < ApplicationController
   private
   def channel_params
     params.require(:channel).permit(:name, :description, :private, :owner_id)
+  end
+
+  def channel_cable(channel)
+    ActionCable.server.broadcast(
+      "threads",
+      id: channel.id,
+      name: channel.name,
+      description: channel.description,
+      private: channel.private,
+      owner_id: channel.owner_id
+    )
   end
 end
