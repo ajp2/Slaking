@@ -22,7 +22,7 @@ export class Header extends Component {
     const logout = () => (
       <ul className='nav-list'>
         <li>
-          <button onClick={this.props.logout}>Logout</button>
+          <a onClick={this.props.logout}>Logout</a>
         </li>
       </ul>
     );

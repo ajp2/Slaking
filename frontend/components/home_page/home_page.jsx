@@ -31,9 +31,14 @@ export class HomePage extends Component {
         />
 
         <div className="main-text">
-          {currentUser ? <button onClick={this.messagesRedirect}>Back To Messages</button> : null}
-          <h2>Where everyone comes together. Get connected today with Slaking</h2>
-          <p>Don't have an account? <span className='guest-login' onClick={this.guestLogin}>Login as a Guest</span></p>
+          <h2>Where everyone comes together.</h2>
+          <h2>Get connected today with <span className='inline-logo'>Slaking</span></h2>
+          {currentUser ? (
+              <button onClick={this.messagesRedirect}>Back To Messages</button>
+            ) : (
+              <p>Don't have an account? <span className='guest-login' onClick={this.guestLogin}>Login as a Guest</span></p>
+            )}
+          <p><a href="http://www.github.com/ajp2/slaking" target='_blank'>Learn More</a></p>
         </div>
       </div>
     );
