@@ -12,6 +12,7 @@ export class SessionForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleModalClick = this.handleModalClick.bind(this);
   }
 
   handleChange(e) {
@@ -35,11 +36,17 @@ export class SessionForm extends Component {
       .then(() => this.props.history.push('/messages'));
   }
 
+  handleModalClick(e) {
+    if (e.target.classList[0] === 'modal') {
+      this.props.history.push('/');
+    }
+  }
+
   render() {
     const loginForm = this.props.formType === 'login';
 
     return (
-      <div className='modal'>
+      <div className='modal' onClick={this.handleModalClick}>
         <form className='session-form'>
           <h2>{loginForm ? 'Log in' : 'Sign Up'}</h2>
           <input 
