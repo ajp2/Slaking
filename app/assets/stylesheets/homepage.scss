@@ -1,0 +1,75 @@
+@import 'variables';
+
+.home {
+  background: url('main.jpg');
+  background-size: cover;
+  background-position: bottom center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #fff;
+
+  h2 {
+    font-size: 36px;
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+
+  .nav-list {
+    display: flex;
+
+    li {
+      padding: 5px 10px;
+    }
+
+    a, button {
+      background: none;
+      border: none;
+      padding: 10px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 20px;
+    }
+
+    a:hover, button:hover {
+      cursor: pointer;
+      color: #ccc;
+    }
+  }
+}
+
+.logo a {
+      font-size: 36px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+    }
+
+.main-text {
+  width: 500px;
+  line-height: 2;
+  position: absolute;
+  top: 200px;
+  left: 200px;
+
+  p {
+    font-size: 18px;
+  }
+
+  .guest-login {
+    padding-bottom: 5px;
+    border-bottom: 2px solid #fff;
+  }
+
+  .guest-login:hover {
+    cursor: pointer;
+    color: #ccc;
+    border-bottom: 2px solid #ccc;
+  }
+}

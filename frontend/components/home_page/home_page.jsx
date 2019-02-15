@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import Header from './header';
 
 
 export class HomePage extends Component {
@@ -19,38 +19,22 @@ export class HomePage extends Component {
       .then(() => this.props.history.push('/messages'));
   }
 
-  render() {    
-    const sessionLinks = () => (
-      <ul className='nav-list'>
-        <li>
-          <button onClick={this.guestLogin}>Login As Guest</button>
-        </li>
-        <li>
-          <Link to='/login'>Login</Link>
-        </li>
-        <li>
-          <Link to='/signup'>Sign Up</Link>
-        </li>
-      </ul>
-    );
-
-    const logout = () => (
-      <ul className='nav-list'>
-        <li>Welcome, {this.props.currentUser.username}</li>
-        <li>
-          <button onClick={this.props.logout}>Logout</button>
-        </li>
-      </ul>
-    );
+  render() {
+    const { currentUser } = this.props;
 
     return (
-      <div>
-        <nav>
-          <h1>Slaking</h1>
-          {this.props.currentUser ? logout() : sessionLinks() }
-        </nav>
+      <div className='home'>
+        <Header
+          currentUser={currentUser}
+          logout={this.props.logout}
+          loginAsGuest={this.props.loginAsGuest}
+        />
 
-        {this.props.currentUser ? <button onClick={this.messagesRedirect}>Back To Messages</button> : null}
+        <div className="main-text">
+          {currentUser ? <button onClick={this.messagesRedirect}>Back To Messages</button> : null}
+          <h2>Where everyone comes together. Get connected today with Slaking</h2>
+          <p>Don't have an account? <span className='guest-login' onClick={this.guestLogin}>Login as a Guest</span></p>
+        </div>
       </div>
     );
   }
