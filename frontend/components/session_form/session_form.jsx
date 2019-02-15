@@ -36,23 +36,37 @@ export class SessionForm extends Component {
   }
 
   render() {
+    const loginForm = this.props.formType === 'login';
+
     return (
-      <form>
-        <label htmlFor="user_username">Username:</label>
-        <input type="text" id="user_username" name="username" onChange={this.handleChange} />
+      <div className='modal'>
+        <form className='session-form'>
+          <h2>{loginForm ? 'Log in' : 'Sign Up'}</h2>
+          <input 
+            type="text"
+            placeholder="Username" 
+            name="username" 
+            onChange={this.handleChange} 
+          />
 
-        {this.props.formType === 'signup' ? (
-          <div>
-            <label htmlFor="user_email">Email:</label>
-            <input type="text" id="user_email" name="email" onChange={this.handleChange} />
-          </div>
-        ) : false }
+          {!loginForm ? (
+              <input 
+                type="text" 
+                placeholder="Email" 
+                name="email" 
+                onChange={this.handleChange} />
+          ) : false }
 
-        <label htmlFor="user_password">Password:</label>
-        <input type="password" id="user_password" name="password" onChange={this.handleChange} />
+          <input 
+            type="password" 
+            placeholder="Password" 
+            name="password" 
+            onChange={this.handleChange} 
+          />
 
-        <button onClick={this.handleSubmit}>Submit</button>
-      </form>
+          <button onClick={this.handleSubmit}>Submit</button>
+        </form>
+      </div>
     );
   }
 }

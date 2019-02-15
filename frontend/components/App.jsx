@@ -10,13 +10,14 @@ import ChannelListContainer from './channels/channel_list_container';
 const App = (props) => (
   <div>
     <Switch>
-      <Route exact path='/' component={HomePageContainer} />
-      {props.location.pathname === '/messages' ? (<Redirect to='/messages/1' />) : false}
+      <ProtectedRoute path='/messages/:channelId' component={ChannelListContainer} />
+      <Route path='/' component={HomePageContainer} />
     </Switch>
 
+    {props.location.pathname === '/messages' ? (<Redirect to='/messages/1' />) : false}
     <AuthRoute path='/login' component={LoginFormContainer} />
     <AuthRoute path='/signup' component={SignupFormContainer} />
-    <ProtectedRoute path='/messages/:channelId' component={ChannelListContainer} />
+    
   </div>
 );
 
