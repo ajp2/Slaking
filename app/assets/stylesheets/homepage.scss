@@ -1,14 +1,10 @@
 @import 'variables';
 
 .home {
+  height: 100vh;
   background: url('main.jpg');
   background-size: cover;
   background-position: bottom center;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   color: #fff;
 
   h2 {
@@ -64,29 +60,17 @@
   position: absolute;
   top: 200px;
   left: 200px;
-
-  p {
-    font-size: 18px;
-
-    a {
-      display: block;
-      width: 130px;
-      margin-top: 100px;
-      color: #fff;
-      text-decoration: none;
-      font-size: 24px;
-    }
-  }
+  font-size: 18px;
 
   .guest-login {
     padding-bottom: 5px;
     border-bottom: 2px solid #fff;
-  }
 
-  .guest-login:hover {
-    cursor: pointer;
-    color: #ccc;
-    border-bottom: 2px solid #ccc;
+    &:hover {
+      cursor: pointer;
+      color: #ccc;
+      border-bottom: 2px solid #ccc;
+    }
   }
 
   .inline-logo {
@@ -101,11 +85,70 @@
     border: 1px solid #fff;
     padding: 15px;
     border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+      color: #ccc;
+      border: 1px solid #ccc;
+    }
+  }
+}
+
+.footer-link {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+
+  a {
+    border-bottom: none;
+    
+    &:hover {
+      border: none;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .home a {
+    font-size: 16px;
   }
 
-  button:hover {
-    cursor: pointer;
-    color: #ccc;
-    border: 1px solid #ccc;
+  .logo a {
+    font-size: 28px;
+  }
+  
+  .main-text {
+    position: static;
+    text-align: center;
+    margin: 50px auto;
+
+    button {
+      font-size: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    
+    .nav-list {
+      flex-direction: column;
+      margin-top: 20px;
+      text-align: center;
+      
+      a {
+        border: none;
+      }
+    }
+  }
+
+  .main-text {
+    width: 100%;
+  }
+
+  .footer-link {
+    margin-top: 50px;
   }
 }

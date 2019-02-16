@@ -31,15 +31,16 @@ export class HomePage extends Component {
         />
 
         <div className="main-text">
-          <h2>Where everyone comes together.</h2>
+          <h2>A better way to communicate.</h2>
           <h2>Get connected today with <span className='inline-logo'>Slaking</span></h2>
           {currentUser ? (
               <button onClick={this.messagesRedirect}>Back To Messages</button>
             ) : (
               <p>Don't have an account? <span className='guest-login' onClick={this.guestLogin}>Login as a Guest</span></p>
             )}
-          <p><a href="http://www.github.com/ajp2/slaking" target='_blank'>Learn More</a></p>
         </div>
+
+        <p className='footer-link'><a href="http://www.github.com/ajp2/slaking" target='_blank'>Learn More</a></p>
       </div>
     );
   }

@@ -34,7 +34,7 @@ export class Messages extends Component {
     const { messages } = this.props;
 
     return (
-      <div>
+      <div className='messages'>
         <h1>Messsages</h1>
         <ul>
           {messages.map((message, idx) => <li key={idx}>{message.content}</li>)}

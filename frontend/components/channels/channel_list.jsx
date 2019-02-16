@@ -31,30 +31,35 @@ export class ChannelList extends Component {
       });
   }
 
+  showChannels() {
+    $('.all-channels').removeClass('all-channels-hidden');
+  }
+
   render() {
     const { channels, currentUser, userChannels } = this.props;
     if (channels && channels.length === 0) return null;
     if (!userChannels) return null;
 
     return (
-      <div>
-        <h2>All Channels</h2>
-        <ul>
-          {channels.map((channel, idx) => 
-            <li key={idx}>
-              <span>{channel.name}</span>
-              {!currentUser.channel_ids.includes(channel.id) ? (
-                <button onClick={() => this.joinChannel(channel.id)}>Join</button>
-              ) : false}
-            </li>
-          )}
-        </ul>
-        <h2>User Channels</h2>
-        <ul>
-          {userChannels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}>{channel.name}</Link></li>)}
-        </ul>
+      <div className='chat'>
+        <section className="channels" onClick={this.showChannels}>
+          <ul className='all-channels all-channels-hidden'>
+            {channels.map((channel, idx) =>
+              <li key={idx}>
+                <span>{channel.name}</span>
+                {!currentUser.channel_ids.includes(channel.id) ? (
+                  <button onClick={() => this.joinChannel(channel.id)}>Join</button>
+                ) : false}
+              </li>
+            )}
+          </ul>
+          <h2>Channels</h2>
+          <ul>
+            {userChannels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}>{channel.name}</Link></li>)}
+          </ul>
+        </section>
 
-        <ChannelFormContainer />
+        {/* <ChannelFormContainer /> */}
         <Route path='/messages/:channelId' component={MessagesContainer} />
       </div>
     )
