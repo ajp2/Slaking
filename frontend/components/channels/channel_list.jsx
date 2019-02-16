@@ -7,6 +7,17 @@ import MessagesContainer from '../messages/messages_container';
 export class ChannelList extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showModal: false
+    };
+
+    this.handleModalClick = this.handleModalClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchChannels();
+    this.props.fetchUsers().then(this.props.fetchCurrentUser);
+    this.createSocket();
   }
 
   joinChannel(channelId) {
@@ -17,12 +28,6 @@ export class ChannelList extends Component {
     this.props.createUserChannel(userChannel);
   }
 
-  componentDidMount() {
-    this.props.fetchChannels();
-    this.props.fetchUsers().then(this.props.fetchCurrentUser);
-    this.createSocket();
-  }
-
   createSocket() {
     this.socket = App.cable.subscriptions.create({
       channel: 'ThreadsChannel'
@@ -31,8 +36,13 @@ export class ChannelList extends Component {
       });
   }
 
-  showChannels() {
-    $('.all-channels').removeClass('all-channels-hidden');
+  handleModalClick(e) {
+    if (this.state.showModal && e.target.classList[0] === 'modal') {
+      this.setState({ showModal: false });
+    } else {
+      this.setState({ showModal: true });
+    }
+    console.log(e.target);
   }
 
   render() {
@@ -40,20 +50,28 @@ export class ChannelList extends Component {
     if (channels && channels.length === 0) return null;
     if (!userChannels) return null;
 
+    const allChannels = () => (
+      <div className="modal" onClick={this.handleModalClick}>
+        <ul className='all-channels'>
+          {channels.map((channel, idx) =>
+            <li key={idx}>
+              <span>{channel.name}</span>
+              {!currentUser.channel_ids.includes(channel.id) ? (
+                <button onClick={() => this.joinChannel(channel.id)}>Join</button>
+              ) : false}
+            </li>
+          )}
+        </ul>
+      </div>
+    )
+
     return (
       <div className='chat'>
-        <section className="channels" onClick={this.showChannels}>
-          <ul className='all-channels all-channels-hidden'>
-            {channels.map((channel, idx) =>
-              <li key={idx}>
-                <span>{channel.name}</span>
-                {!currentUser.channel_ids.includes(channel.id) ? (
-                  <button onClick={() => this.joinChannel(channel.id)}>Join</button>
-                ) : false}
-              </li>
-            )}
-          </ul>
-          <h2>Channels</h2>
+        <section className="channels">
+
+          {this.state.showModal ? allChannels() : null}
+
+          <h2 onClick={this.handleModalClick}>Channels</h2>
           <ul>
             {userChannels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}>{channel.name}</Link></li>)}
           </ul>
