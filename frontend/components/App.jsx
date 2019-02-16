@@ -5,12 +5,12 @@ import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import HomePageContainer from './home_page/home_page_container';
 import LoginFormContainer from "./session_form/login_form_container";
 import SignupFormContainer from "./session_form/signup_form_container";
-import ChannelListContainer from './channels/channel_list_container';
+import ChannelsContainer from './channels/channels_container';
 
 const App = (props) => (
   <div>
     <Switch>
-      <ProtectedRoute path='/messages/:channelId' component={ChannelListContainer} />
+      <ProtectedRoute path='/messages/:channelId' component={ChannelsContainer} />
       <Route path='/' component={HomePageContainer} />
     </Switch>
 

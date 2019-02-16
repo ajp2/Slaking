@@ -10,27 +10,17 @@ export class ChannelList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      channelModal: false,
-      channelFormModal: false,
-      dmModal: false
+      public: false,
+      publicForm: false,
+      private: false
     };
   }
 
-  componentDidMount() {
-    this.props.fetchChannels();
-    this.props.fetchUsers().then(this.props.fetchCurrentUser);
-    this.createSocket();
-  }
-
-  createSocket() {
-    this.socket = App.cable.subscriptions.create({
-      channel: 'ThreadsChannel'
-    }, {
-        received: data => this.props.receiveChannel(data),
-      });
-  }
 
   handleModalClick(e, name) {
+    console.log("sldfjkasdf");
+    console.log(this.state);
+    console.log(e.target);
     if (this.state[name] && e.target.classList[0] === 'modal') {
       this.setState({ [name]: false });
     } else {
@@ -39,15 +29,9 @@ export class ChannelList extends Component {
   }
 
   render() {
-    const { channels, currentUser, userChannels } = this.props;
-    if (channels && channels.length === 0) return null;
-    if (!userChannels) return null;
-
-    const publicChannels = userChannels.filter(channel => !channel.private);
-    const privateChannels = userChannels.filter(channel => channel.private);
 
     const channelModal = () => (
-      <div className="modal" onClick={e => this.handleModalClick(e, 'channelModal')}>
+      <div className="modal" onClick={e => this.handleModalClick(e, 'public')}>
         <AllChannels
           channels={channels}
           currentUser={currentUser}
@@ -56,41 +40,42 @@ export class ChannelList extends Component {
       </div>
     );
     const channelFormModal = () => (
-      <div className="modal" onClick={e => this.handleModalClick(e, 'channelFormModal')}>
+      <div className="modal" onClick={e => this.handleModalClick(e, 'publicForm')}>
         <ChannelFormContainer />
       </div>
     );
+    const privateFormModal = () => (
+      <div className="modal" onClick={e => this.handleModalClick(e, 'private')}>
+        <ChannelFormContainer />
+      </div>
+    );
+
+    const { channels, currentUser, channelType } = this.props;
+    const publicChannel = channelType === 'public';
+    const channelText = publicChannel ? 'Channels' : 'Direct Message';
+    const formName = publicChannel ? 'publicForm' : 'private';
     
     return (
-      <div className='chat'>
-        <section className="channels">
+      <div>
 
-          <div className='channel-text'>
-            <h2 onClick={e => this.handleModalClick(e, 'channelModal')}>Channels</h2>
-            <span onClick={e => this.handleModalClick(e, 'channelFormModal')}>+</span>
-          </div>
-          <ul>
-            {publicChannels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}># {channel.name}</Link></li>)}
-          </ul>
+        <div className='channel-text'>
+          <h2 onClick={e => this.handleModalClick(e, channelType)}>{channelText}</h2>
+          <span onClick={e => this.handleModalClick(e, formName)}>+</span>
+        </div>
+        <ul>
+          {channels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}># {channel.name}</Link></li>)}
+        </ul>
 
-          {/* List of all channels (opens modal) */}
-          {this.state.channelModal ?  channelModal() : null}
 
-          {/* Form to create new channel (opens modal) */}
-          {this.state.channelFormModal ? channelFormModal() : null}
+        {/* List of all channels (opens modal) */}
+        {this.state.public ?  channelModal() : null}
 
-          <div className='channel-text'>
-            <h2 onClick={e => this.handleModalClick(e, 'dmModal')}>Direct Messages</h2>
-            <span>+</span>
-          </div>
-          <ul>
-            {privateChannels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}>@ {channel.name}</Link></li>)}
-          </ul>
-        </section>
+        {/* Form to create new channel (opens modal) */}
+        {this.state.publicForm ? channelFormModal() : null}
 
-        {this.state.dmModal ? console.log("modal open") : console.log("modal closed")}
+        {/* Form to create a direct message (opens modal) */}
+        {this.state.private ? privateFormModal() : null}
 
-        <Route path='/messages/:channelId' component={MessagesContainer} />
       </div>
     )
   }

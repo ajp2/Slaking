@@ -38,11 +38,23 @@ export class ChannelForm extends Component {
   render() {
     return (
       <form className='form'>
-        <label htmlFor="channel_name">Name:</label>
-        <input type="text" id="channel_name" name="name" onChange={this.handleChange} value={this.state.name} />
+        <h2>Create Channel</h2>
 
-        <label htmlFor="channel_description">Description:</label>
-        <input type="text" id="channel_description" name="description" onChange={this.handleChange} value={this.state.description} />
+        <input 
+          type="text" 
+          placeholder="Channel Name" 
+          name="name" 
+          onChange={this.handleChange}
+          value={this.state.name} 
+        />
+
+        <input 
+          type="text" 
+          placeholder="Channel Description" 
+          name="description" 
+          onChange={this.handleChange} 
+          value={this.state.description} 
+        />
 
         <button onClick={this.handleSubmit}>Create</button>
       </form>
