@@ -1,16 +1,27 @@
+@import 'variables';
+
 .chat {
   display: flex;
   height: 100vh;
 }
 
 .channels {
-  width: 13%;
+  flex-basis: 13%;
   background: rgb(56, 50, 107);
-  color: #fff;
+  color: #ccc;
   padding: 25px 0 0 15px;
 
   a {
-    color: #fff;
+    color: #ccc;
+    text-decoration: none;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  ul > li {
+    padding: 5px 20px;
   }
 }
 
@@ -29,22 +40,17 @@
 
 .channel-text {
   margin-top: 50px;
-  padding: 5px 20px 5px 5px;
+  padding: 5px 25px 5px 5px;
   display: flex;
   justify-content: space-between;
+  font-size: 18px;
 
-  h2 {
-
-    &:hover {
-      cursor: pointer;
-    }
+  h2:hover, span:hover {
+    cursor: pointer;
+    color: #fff;
   }
 
   span {
-    padding: 3px;
-
-    &:hover {
-      cursor: pointer;
-    }
+    padding: 0 5px;
   }
 }

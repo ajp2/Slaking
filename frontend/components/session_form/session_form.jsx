@@ -47,7 +47,7 @@ export class SessionForm extends Component {
 
     return (
       <div className='modal' onClick={this.handleModalClick}>
-        <form className='session-form'>
+        <form className='form'>
           <h2>{loginForm ? 'Log in' : 'Sign Up'}</h2>
           <input 
             type="text"

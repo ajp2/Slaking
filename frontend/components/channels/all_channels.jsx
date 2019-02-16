@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 
 export class AllChannels extends Component {
+  joinChannel(channelId) {
+    const userChannel = {
+      user_id: this.props.currentUser.id,
+      channel_id: channelId
+    }
+    this.props.createUserChannel(userChannel);
+  }
+  
   render() {
     return (
       <ul className='all-channels'>

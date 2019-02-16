@@ -37,7 +37,7 @@ export class ChannelForm extends Component {
 
   render() {
     return (
-      <form>
+      <form className='form'>
         <label htmlFor="channel_name">Name:</label>
         <input type="text" id="channel_name" name="name" onChange={this.handleChange} value={this.state.name} />
 
