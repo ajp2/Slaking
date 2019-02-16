@@ -4,15 +4,47 @@
 }
 
 .channels {
-  width: 400px; 
+  width: 13%;
+  background: rgb(56, 50, 107);
+  color: #fff;
+  padding: 25px 0 0 15px;
+
+  a {
+    color: #fff;
+  }
 }
 
 .all-channels {
   width: 40%;
   margin: 0 auto;
+  margin-top: 10%;
   background: #fff;
+  padding: 25px;
+  color: #000;
 }
 
 .all-channels-hidden {
   display: none;
+}
+
+.channel-text {
+  margin-top: 50px;
+  padding: 5px 20px 5px 5px;
+  display: flex;
+  justify-content: space-between;
+
+  h2 {
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  span {
+    padding: 3px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

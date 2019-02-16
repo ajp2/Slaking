@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom';
 
 import ChannelFormContainer from './channel_form_container';
 import MessagesContainer from '../messages/messages_container';
+import AllChannels from './all_channels';
 
 export class ChannelList extends Component {
   constructor(props) {
@@ -42,7 +43,6 @@ export class ChannelList extends Component {
     } else {
       this.setState({ showModal: true });
     }
-    console.log(e.target);
   }
 
   render() {
@@ -50,31 +50,28 @@ export class ChannelList extends Component {
     if (channels && channels.length === 0) return null;
     if (!userChannels) return null;
 
-    const allChannels = () => (
-      <div className="modal" onClick={this.handleModalClick}>
-        <ul className='all-channels'>
-          {channels.map((channel, idx) =>
-            <li key={idx}>
-              <span>{channel.name}</span>
-              {!currentUser.channel_ids.includes(channel.id) ? (
-                <button onClick={() => this.joinChannel(channel.id)}>Join</button>
-              ) : false}
-            </li>
-          )}
-        </ul>
-      </div>
-    )
-
     return (
       <div className='chat'>
         <section className="channels">
 
-          {this.state.showModal ? allChannels() : null}
+          {this.state.showModal ? (
+            <div className="modal" onClick={this.handleModalClick}>
+              <AllChannels channels={channels} currentUser={currentUser} />
+            </div>
+          ) : null}
 
-          <h2 onClick={this.handleModalClick}>Channels</h2>
+          <div className='channel-text'>
+            <h2 onClick={this.handleModalClick}>Channels</h2>
+            <span>+</span>
+          </div>
           <ul>
             {userChannels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}>{channel.name}</Link></li>)}
           </ul>
+
+          <div className='channel-text'>
+            <h2 onClick={this.handleModalClick}>Direct Messages</h2>
+            <span>+</span>
+          </div>
         </section>
 
         {/* <ChannelFormContainer /> */}
