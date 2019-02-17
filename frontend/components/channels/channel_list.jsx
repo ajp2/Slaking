@@ -28,7 +28,7 @@ export class ChannelList extends Component {
   formatName(name) {
     if (this.props.channelType === 'public') return name;
     let formattedName = name.split(', ').filter(username => username !== this.props.currentUser.username);
-    return formattedName[0] + ' ...';
+    return formattedName.length > 1 ? formattedName[0] + ' ...' : formattedName[0];
   }
 
   render() {
@@ -49,12 +49,12 @@ export class ChannelList extends Component {
     );
     const channelFormModal = () => (
       <div className="modal" onClick={e => this.handleModalClick(e, 'publicForm')}>
-        <ChannelFormContainer />
+        <ChannelFormContainer closeModal={() => this.toggleModal('publicForm')} />
       </div>
     );
     const privateFormModal = () => (
       <div className="modal" onClick={e => this.handleModalClick(e, 'private')}>
-        <DirectMessageContainer />
+        <DirectMessageContainer closeModal={() => this.toggleModal('private')} />
       </div>
     );
     

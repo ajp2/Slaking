@@ -3,7 +3,8 @@ import ChannelForm from './channel_form';
 import { createUserChannel } from '../../actions/channel_actions';
 import { createChannel } from '../../util/channel_api_util';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
+  closeModal: ownProps.closeModal,
   currentUserId: state.session.id,
   createChannel: channel => createChannel(channel)
 });

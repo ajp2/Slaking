@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 export class AllChannels extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      channelId: undefined
+    };
+  }
+
   joinChannel(channelId) {
     const userChannel = {
       user_id: this.props.currentUser.id,
       channel_id: channelId
     }
     this.props.createUserChannel(userChannel);
+    this.setState({ channelId }, this.props.closeModal);
   }
   
   render() {
-    const joinedChannels = this.props.channels.filter(channel => this.props.currentUser.channel_ids.includes(channel.id));
-    const otherChannels = this.props.channels.filter(channel => !this.props.currentUser.channel_ids.includes(channel.id));    
+    const { channel_ids } = this.props.currentUser;
+    const joinedChannels = this.props.channels.filter(channel => (
+      channel_ids.includes(channel.id) && !channel.private
+    ));
+    const otherChannels = this.props.channels.filter(channel => !channel_ids.includes(channel.id));    
     
     return (
       <div className='all-channels'>
@@ -44,6 +55,7 @@ export class AllChannels extends Component {
             </ul>
         </div>
 
+        {this.state.channelId ? <Redirect to={`/messages/${this.state.channelId}`} /> : null}
       </div>
     )
   }

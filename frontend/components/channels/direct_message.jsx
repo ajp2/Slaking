@@ -6,7 +6,8 @@ export class DirectMessageForm extends Component {
     super(props);
     this.state = {
       search: "",
-      users: []
+      users: [],
+      existingChannel: undefined
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -46,30 +47,32 @@ export class DirectMessageForm extends Component {
     const existingChannel = this.channelExists(namesList);
     // DM already exists, no need to create a new one
     if (existingChannel) {
-      this.existingChannel = existingChannel;
-      // close modal;
-      return;
-    }
+      this.setState({ existingChannel: existingChannel }, this.props.closeModal);
+    } else {
 
-    const channel = {
-      name: namesList,
-      description: `Members: ${namesList}`,
-      owner_id: this.props.currentUser.id,
-      private: true
-    };
+      // else statement needed to stop function executing
+      const channel = {
+        name: namesList,
+        description: `Members: ${namesList}`,
+        owner_id: this.props.currentUser.id,
+        private: true
+      };
 
-    this.props.createChannel(channel)
-      .then(res => {
-        dmList.forEach(user => {
-          const userChannel = {
-             user_id: user.id,
-             channel_id: res.id
-          };
-          this.props.createUserChannel(userChannel);
+      this.props.createChannel(channel)
+        .then(res => {
+          dmList.forEach(user => {
+            const userChannel = {
+              user_id: user.id,
+              channel_id: res.id
+            };
+            this.props.createUserChannel(userChannel);
+          });
+
+          this.setState({ search: "", users: [] });
+          this.props.closeModal();
         });
 
-        this.setState({ search: "", users: [] });
-      });
+    }
   }
 
   filterResults(allUsers) {
@@ -119,7 +122,7 @@ export class DirectMessageForm extends Component {
           </ul>
         </div>
 
-        {this.existingChannel ? <Redirect to={`/messages/${this.existingChannel.id}`} /> : null}
+        {this.state.existingChannel ? <Redirect to={`/messages/${this.state.existingChannel.id}`} /> : null}
 
       </div>
     );
@@ -127,7 +130,3 @@ export class DirectMessageForm extends Component {
 }
 
 export default DirectMessageForm;
-
-
-// redirect to dm instead of creating new one if same users
-// close modals (all) on form submission; redirect to relevant page

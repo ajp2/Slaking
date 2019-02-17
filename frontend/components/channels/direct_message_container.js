@@ -4,7 +4,8 @@ import { createUserChannel } from '../../actions/channel_actions';
 import { createChannel } from '../../util/channel_api_util';
 import { selectAllChannels } from '../../reducers/selectors';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
+  closeModal: ownProps.closeModal,
   currentUser: state.entities.users[state.session.id],
   allUsers: state.entities.users,
   createChannel: channel => createChannel(channel),

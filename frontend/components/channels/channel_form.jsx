@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 export class ChannelForm extends Component {
   constructor() {
@@ -31,7 +32,7 @@ export class ChannelForm extends Component {
         };
         this.props.createUserChannel(userChannel);
 
-        this.setState({ name: "", description: "" });
+        this.setState({ name: "", description: "", existingChannel: res }, this.props.closeModal);
       });
   }
 
@@ -57,6 +58,8 @@ export class ChannelForm extends Component {
         />
 
         <button onClick={this.handleSubmit}>Create</button>
+
+        {this.state.existingChannel ? <Redirect to={`/messages/${this.state.existingChannel.id}`} /> : null}
       </form>
     );
   }
