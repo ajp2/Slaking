@@ -6,7 +6,7 @@
 }
 
 .channels {
-  flex-basis: 13%;
+  flex-basis: 11%;
   background: rgb(56, 50, 107);
   color: #ccc;
   padding: 25px 0 0 15px;
@@ -101,4 +101,8 @@
   span {
     padding: 0 5px;
   }
+}
+
+.channel-header {
+  width: 100%;
 }

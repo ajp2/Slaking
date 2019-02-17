@@ -19,7 +19,7 @@ export class MessageForm extends Component {
     e.preventDefault();
     const message = {
       content: this.state.content,
-      author_id: this.props.currentUser,
+      author_id: this.props.currentUserId,
       channel_id: this.props.channelId
     }
     this.props.createMessage(message)

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 
 import MessageForm from '../messages/message_form';
+import ChannelHeaderContainer from '../channels/channel_header_container';
 
 export class Messages extends Component {
   constructor(props) {
@@ -40,13 +41,15 @@ export class Messages extends Component {
 
     return (
       <div className='messages'>
+        <Route path='/messages/:channelId' component={ChannelHeaderContainer} />
+        
         <h1>Messsages</h1>
         <ul>
           {messages.map((message, idx) => <li key={idx}>{message.content}</li>)}
         </ul>
         <MessageForm 
           createMessage={this.props.createMessage} 
-          currentUser={this.props.currentUser}
+          currentUserId={this.props.currentUser.id}
           channelId={this.channelId}
         />
       </div>

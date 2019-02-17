@@ -41,6 +41,7 @@ export class Channels extends Component {
         </section>
 
         <Route path='/messages/:channelId' component={MessagesContainer} />
+
       </div>
     )
   }

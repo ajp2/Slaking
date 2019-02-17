@@ -6,7 +6,7 @@ import { selectAllMessages } from '../../reducers/selectors';
 
 const mapStateToProps = state => ({
   messages: selectAllMessages(state),
-  currentUser: state.session.id,
+  currentUser: state.entities.users[state.session.id],
   createMessage: message => createMessage(message)
 });
 
