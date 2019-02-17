@@ -16,27 +16,33 @@ export class AllChannels extends Component {
     
     return (
       <div className='all-channels'>
+        <h3>Browse Channels</h3>
 
-        <h3>Channels you can join</h3>
-        <ul>
-          {otherChannels.map((channel, idx) =>
-            <li key={idx} onClick={() => this.joinChannel(channel.id)}>
-              <a>
-                # {channel.name}
-                {console.log(channel)}
-              </a>
-            </li>
-          )}  
-        </ul>
-
-        <h3>Channels you belong to</h3>
+        <div className="channel-detail">
+          <p>Channels you can join</p>
           <ul>
-            {joinedChannels.map((channel, idx) =>
-              <li key={idx}>
-                <Link to={`/messages/${channel.id}`} onClick={this.props.closeModal}># {channel.name}</Link>
+            {otherChannels.map((channel, idx) =>
+              <li key={idx} onClick={() => this.joinChannel(channel.id)}>
+                <a>
+                  # {channel.name}
+                  <span>{channel.description}</span>
+                </a>
               </li>
-            )}
+            )}  
           </ul>
+
+          <p>Channels you belong to</p>
+            <ul>
+              {joinedChannels.map((channel, idx) =>
+                <li key={idx}>
+                  <Link to={`/messages/${channel.id}`} onClick={this.props.closeModal}>
+                    # {channel.name}
+                    <span>{channel.description}</span>
+                  </Link>
+                </li>
+              )}
+            </ul>
+        </div>
 
       </div>
     )

@@ -42,24 +42,25 @@ export class DirectMessageForm extends Component {
       // fetchUsers; list all users to DM, can add multiple
       // search bar to search users
       
-      <form className='all-channels direct-message-form'>
-        <h2>Direct Message</h2>
+      <div className="all-channels">
+        <form className='direct-message-form'>
+          <h2>Direct Message</h2>
 
-        <input
-          type="text"
-          placeholder="Start a conversation"
-          name="search"
-          onChange={this.handleChange}
-          value={this.state.name}
-        />
+          <input
+            type="text"
+            placeholder="Start a conversation"
+            name="search"
+            onChange={this.handleChange}
+            value={this.state.name}
+          />
 
-        <button onClick={this.handleSubmit}>Go</button>
+          <button onClick={this.handleSubmit}>Go</button>
+        </form>
 
         <ul>
           {allUsers.map((user, idx) => <li key={idx}>{user.username}</li>)}
         </ul>
-
-      </form>
+      </div>
     );
   }
 }

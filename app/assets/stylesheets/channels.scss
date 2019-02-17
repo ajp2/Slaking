@@ -32,26 +32,53 @@
 }
 
 .all-channels {
-  width: 40%;
+  width: 50%;
   height: 60%;
   background: #fff;
   padding: 25px;
   color: #000;
-  overflow: scroll;
+  border-radius: 5px;
+
+  .channel-detail {
+    height: 80%;
+    overflow: scroll;
+  }
 
   h3 {
     font-size: 24px;
+    text-align: center;
+    padding: 15px 0;
+    font-weight: bold;
+  }
+
+  p {
+    padding: 30px 0 25px 0;
+    font-weight: bold;
   }
 
   a {
     display: block;
     color: #000;
-    padding: 10px 0;
+    padding: 15px 0 15px 15px;
+    text-decoration: none;
+    border-top: 1px solid #eee;
+
+    &:last-of-type {
+      border-bottom: 1px solid #eee;
+    }
   }
 
   li:hover {
     cursor: pointer;
     background: #eee;
+  }
+
+  span {
+    display: block;
+    padding-left: 15px;
+    padding-top: 10px;
+    color: rgb(128, 125, 125);
+    font-size: 14px;
   }
 }
 
