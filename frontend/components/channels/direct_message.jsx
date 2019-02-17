@@ -10,14 +10,31 @@ export class DirectMessageForm extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.filterResults = this.filterResults.bind(this);
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  handleClick(selectedUser) {
+    const inState = this.state.users.some(user => user.id === selectedUser.id);
+    if (inState) return;
+
+    const newUsers = this.state.users.slice();
+    newUsers.push(selectedUser);
+    this.setState({ users: newUsers });
+  }
+
+  removeUser(selectedUser) {
+    const newUsers = this.state.users.slice().filter(user => user.id !== selectedUser.id);
+    this.setState({ users: newUsers });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
+    if (this.state.users.length === 0) return;
+    
     // const channel = {
     //   ...this.state,
     //   owner_id: this.props.currentUserId
@@ -35,17 +52,23 @@ export class DirectMessageForm extends Component {
     //   });
   }
 
+  filterResults(allUsers) {
+    return allUsers.filter(user => user.username.includes(this.state.search));
+  }
+
   render() {
-    const allUsers = Object.values(this.props.allUsers);
+    let allUsers = Object.values(this.props.allUsers);
+    const currentUser = allUsers.findIndex(user => user.id === this.props.currentUserId);
+    delete allUsers[currentUser];
+    if (this.state.search) {
+      allUsers = this.filterResults(allUsers);
+    }
 
     return (
-      // fetchUsers; list all users to DM, can add multiple
-      // search bar to search users
-      
       <div className="all-channels">
-        <form className='direct-message-form'>
-          <h2>Direct Message</h2>
+        <h3>Direct Message</h3>
 
+        <form className='direct-message-form'>
           <input
             type="text"
             placeholder="Start a conversation"
@@ -57,9 +80,25 @@ export class DirectMessageForm extends Component {
           <button onClick={this.handleSubmit}>Go</button>
         </form>
 
-        <ul>
-          {allUsers.map((user, idx) => <li key={idx}>{user.username}</li>)}
+        <ul className='selected-users-list'>
+          {this.state.users.map((user, idx) => (
+            <li key={idx}>
+              {user.username}
+              <span onClick={() => this.removeUser(user)}>X</span>
+            </li>
+          ))}
         </ul>
+
+        <div className="channel-detail">
+          <ul>
+            {allUsers.map((user, idx) => (
+              <li key={idx} onClick={() => this.handleClick(user)}>
+                <a>{user.username}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
       </div>
     );
   }
