@@ -16,11 +16,13 @@ export class ChannelList extends Component {
   }
 
   handleModalClick(e, name) {
-    if (this.state[name] && e.target.classList[0] === 'modal') {
+    if (e.target.classList[0] === 'modal') {
       this.setState({ [name]: false });
-    } else {
-      this.setState({ [name]: true });
     }
+  }
+
+  toggleModal(name) {
+    this.setState({ [name]: !this.state[name] });
   }
 
   render() {
@@ -32,9 +34,10 @@ export class ChannelList extends Component {
     const channelModal = () => (
       <div className="modal" onClick={e => this.handleModalClick(e, 'public')}>
         <AllChannels
-          channels={channels}
+          channels={this.props.allChannels}
           currentUser={currentUser}
           createUserChannel={this.props.createUserChannel}
+          closeModal={() => this.toggleModal('public')}
         />
       </div>
     );
@@ -52,13 +55,15 @@ export class ChannelList extends Component {
     return (
       <div>
 
-        <div className='channel-text'>
-          <h2 onClick={e => this.handleModalClick(e, channelType)}>{channelText}</h2>
-          <span onClick={e => this.handleModalClick(e, formName)}>+</span>
+        <div className="channel-list">
+          <div className='channel-text'>
+            <h2 onClick={e => this.toggleModal(channelType)}>{channelText}</h2>
+            <span onClick={e => this.toggleModal(formName)}>+</span>
+          </div>
+          <ul>
+            {channels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}># {channel.name}</Link></li>)}
+          </ul>
         </div>
-        <ul>
-          {channels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}># {channel.name}</Link></li>)}
-        </ul>
 
 
         {/* List of all channels (opens modal) */}

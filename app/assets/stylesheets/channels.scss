@@ -14,7 +14,9 @@
   form h2 {
     color: #000;
   }
+}
 
+.channel-list {
   a {
     color: #ccc;
     text-decoration: none;
@@ -31,11 +33,26 @@
 
 .all-channels {
   width: 40%;
-  margin: 0 auto;
-  margin-top: 10%;
+  height: 60%;
   background: #fff;
   padding: 25px;
   color: #000;
+  overflow: scroll;
+
+  h3 {
+    font-size: 24px;
+  }
+
+  a {
+    display: block;
+    color: #000;
+    padding: 10px 0;
+  }
+
+  li:hover {
+    cursor: pointer;
+    background: #eee;
+  }
 }
 
 .all-channels-hidden {

@@ -11,6 +11,7 @@ import { fetchUsers, fetchCurrentUser } from '../../actions/session_actions';
 import { selectAllChannels, selectUserChannels } from '../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
+  allChannels: selectAllChannels(state),
   currentUser: state.entities.users[state.session.id],
   channels: ownProps.channels,
   channelType: ownProps.channelType

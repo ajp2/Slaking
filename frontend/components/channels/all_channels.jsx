@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export class AllChannels extends Component {
   joinChannel(channelId) {
@@ -10,19 +11,36 @@ export class AllChannels extends Component {
   }
   
   render() {
+    const joinedChannels = this.props.channels.filter(channel => this.props.currentUser.channel_ids.includes(channel.id));
+    const otherChannels = this.props.channels.filter(channel => !this.props.currentUser.channel_ids.includes(channel.id));    
+    
     return (
-      <ul className='all-channels'>
-        {this.props.channels.map((channel, idx) =>
-          <li key={idx}>
-            <span>{channel.name}</span>
-            {!this.props.currentUser.channel_ids.includes(channel.id) ? (
-              <button onClick={() => this.joinChannel(channel.id)}>Join</button>
-            ) : false}
-          </li>
-        )}
-      </ul>
+      <div className='all-channels'>
+
+        <h3>Channels you can join</h3>
+        <ul>
+          {otherChannels.map((channel, idx) =>
+            <li key={idx} onClick={() => this.joinChannel(channel.id)}>
+              <a>
+                # {channel.name}
+                {console.log(channel)}
+              </a>
+            </li>
+          )}  
+        </ul>
+
+        <h3>Channels you belong to</h3>
+          <ul>
+            {joinedChannels.map((channel, idx) =>
+              <li key={idx}>
+                <Link to={`/messages/${channel.id}`} onClick={this.props.closeModal}># {channel.name}</Link>
+              </li>
+            )}
+          </ul>
+
+      </div>
     )
   }
 }
 
-export default AllChannels
+export default AllChannels;

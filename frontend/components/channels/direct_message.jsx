@@ -37,13 +37,12 @@ export class DirectMessageForm extends Component {
 
   render() {
     const allUsers = Object.values(this.props.allUsers);
-    console.log(allUsers);
 
     return (
       // fetchUsers; list all users to DM, can add multiple
       // search bar to search users
       
-      <form className='form direct-message-form'>
+      <form className='all-channels direct-message-form'>
         <h2>Direct Message</h2>
 
         <input
