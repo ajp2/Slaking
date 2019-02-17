@@ -25,6 +25,12 @@ export class ChannelList extends Component {
     this.setState({ [name]: !this.state[name] });
   }
 
+  formatName(name) {
+    if (this.props.channelType === 'public') return name;
+    let formattedName = name.split(', ').filter(username => username !== this.props.currentUser.username);
+    return formattedName[0] + ' ...';
+  }
+
   render() {
     const { channels, currentUser, channelType } = this.props;
     const publicChannel = channelType === 'public';
@@ -61,7 +67,7 @@ export class ChannelList extends Component {
             <span onClick={e => this.toggleModal(formName)}>+</span>
           </div>
           <ul>
-            {channels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}># {channel.name}</Link></li>)}
+            {channels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}># {this.formatName(channel.name)}</Link></li>)}
           </ul>
         </div>
 

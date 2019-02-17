@@ -12,6 +12,10 @@ const usersReducer = (state = {}, action) => {
       return merge({}, state, { [action.currentUser.id]: action.currentUser });
     case RECEIVE_USER_CHANNEL:
       const currentUserId = action.userChannel.user_id;
+
+      // Not the current user; dispatching a multiple use DM
+      if (!state[currentUserId].channel_ids) return state;
+
       let channel_ids = state[currentUserId].channel_ids.slice();
       channel_ids.push(action.userChannel.channel_id);
       newState = merge({}, state);

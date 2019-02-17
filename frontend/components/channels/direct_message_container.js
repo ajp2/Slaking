@@ -2,11 +2,13 @@ import { connect } from 'react-redux';
 import DirectMessage from './direct_message';
 import { createUserChannel } from '../../actions/channel_actions';
 import { createChannel } from '../../util/channel_api_util';
+import { selectAllChannels } from '../../reducers/selectors';
 
 const mapStateToProps = state => ({
-  currentUserId: state.session.id,
+  currentUser: state.entities.users[state.session.id],
   allUsers: state.entities.users,
-  createChannel: channel => createChannel(channel)
+  createChannel: channel => createChannel(channel),
+  allChannels: selectAllChannels(state)
 });
 
 const mapDispatchToProps = dispatch => ({

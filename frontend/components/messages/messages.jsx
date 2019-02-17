@@ -18,6 +18,7 @@ export class Messages extends Component {
     this.channelId = this.props.match.params.channelId;
     if (prevProps.match.params.channelId !== this.channelId) {
       this.props.fetchMessages(this.channelId);
+      this.createSocket();
     }
   }
 
@@ -26,7 +27,11 @@ export class Messages extends Component {
       channel: 'MessagesChannel',
       channel_room: this.channelId
     }, {
-        received: data => this.props.receiveMessage(data),
+        received: data => {
+          if (data.channel_id == this.channelId) {
+            this.props.receiveMessage(data);
+          }
+        }
       });
   }
 

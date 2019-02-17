@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 export class DirectMessageForm extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ export class DirectMessageForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.filterResults = this.filterResults.bind(this);
+    this.channelExists = this.channelExists.bind(this);
   }
 
   handleChange(e) {
@@ -31,25 +33,43 @@ export class DirectMessageForm extends Component {
     this.setState({ users: newUsers });
   }
 
+  channelExists(name) {
+    return this.props.allChannels.find(channel => channel.name === name);
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.users.length === 0) return;
-    
-    // const channel = {
-    //   ...this.state,
-    //   owner_id: this.props.currentUserId
-    // };
+    const dmList = this.state.users.slice().concat(this.props.currentUser);
+    const namesList = dmList.map(user => user.username).join(', ');
 
-    // this.props.createChannel(channel)
-    //   .then(res => {
-    //     const userChannel = {
-    //       user_id: res.owner_id,
-    //       channel_id: res.id
-    //     };
-    //     this.props.createUserChannel(userChannel);
+    const existingChannel = this.channelExists(namesList);
+    // DM already exists, no need to create a new one
+    if (existingChannel) {
+      this.existingChannel = existingChannel;
+      // close modal;
+      return;
+    }
 
-    //     this.setState({ name: "", description: "" });
-    //   });
+    const channel = {
+      name: namesList,
+      description: `Members: ${namesList}`,
+      owner_id: this.props.currentUser.id,
+      private: true
+    };
+
+    this.props.createChannel(channel)
+      .then(res => {
+        dmList.forEach(user => {
+          const userChannel = {
+             user_id: user.id,
+             channel_id: res.id
+          };
+          this.props.createUserChannel(userChannel);
+        });
+
+        this.setState({ search: "", users: [] });
+      });
   }
 
   filterResults(allUsers) {
@@ -58,7 +78,7 @@ export class DirectMessageForm extends Component {
 
   render() {
     let allUsers = Object.values(this.props.allUsers);
-    const currentUser = allUsers.findIndex(user => user.id === this.props.currentUserId);
+    const currentUser = allUsers.findIndex(user => user.id === this.props.currentUser.id);
     delete allUsers[currentUser];
     if (this.state.search) {
       allUsers = this.filterResults(allUsers);
@@ -99,9 +119,15 @@ export class DirectMessageForm extends Component {
           </ul>
         </div>
 
+        {this.existingChannel ? <Redirect to={`/messages/${this.existingChannel.id}`} /> : null}
+
       </div>
     );
   }
 }
 
 export default DirectMessageForm;
+
+
+// redirect to dm instead of creating new one if same users
+// close modals (all) on form submission; redirect to relevant page
