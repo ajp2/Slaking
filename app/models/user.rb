@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   has_many :user_channels
   has_many :channels, through: :user_channels
+  has_one_attached :avatar
 
   def self.find_by_credentials(username, password)
     @user = User.find_by(username: username)
