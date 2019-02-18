@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 export class ChannelHeader extends Component {
   render() {
-    console.log(this.props.channel);
     return (
       <div className='channel-header'>
         <h2>{this.props.channel.name}</h2>

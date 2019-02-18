@@ -29,15 +29,17 @@ export class Messages extends Component {
       channel_room: this.channelId
     }, {
         received: data => {
-          if (data.channel_id == this.channelId) {
-            this.props.receiveMessage(data);
+          const res = JSON.parse(data.html);
+          if (res.channel_id == this.channelId) {
+            console.log(data.html);
+            this.props.receiveMessage(res);
           }
         }
       });
   }
 
   render() {
-    const { messages } = this.props;
+    const { messages, messageAuthor } = this.props;
 
     return (
       <div className='main-messages'>
@@ -45,7 +47,17 @@ export class Messages extends Component {
         
         <div className="messages">
           <ul>
-            {messages.map((message, idx) => <li key={idx}>{message.content}</li>)}
+            {messages.map((message, idx) => (
+              <li key={idx}>
+                <div className="message-info">
+                  <span className='message-author'>{messageAuthor(message.author_id).username}</span>
+                  <span>{message.time}</span>
+                  <span>-</span>
+                  <span>{message.date} ago</span>
+                </div>
+                {message.content}
+              </li>
+            ))}
           </ul>
         </div>
 

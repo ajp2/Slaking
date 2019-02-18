@@ -108,10 +108,11 @@
 }
 
 .channel-header {
-  width: 100%;
-  position: fixed;
-  z-index: 2;
+  //   width: 100%;
+  //   position: fixed;
+  //   z-index: 2;
+  height: 5vh;
+  padding:  15px;
   background: #fff;
-  padding: 15px;
   border-bottom: 1px solid #eee;
 }
