@@ -28,9 +28,13 @@ export class MessageForm extends Component {
 
   render() {
     return (
-      <form>
-        <input type="text" onChange={this.handleChange} value={this.state.content} />
-        <button onClick={this.handleSubmit}>Submit</button>
+      <form className='message-input' onSubmit={this.handleSubmit}>
+        <input 
+          type="text" 
+          onChange={this.handleChange} 
+          value={this.state.content} 
+          placeholder='Message' 
+        />
       </form>
     )
   }

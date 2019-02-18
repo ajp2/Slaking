@@ -6,10 +6,16 @@
 }
 
 .channels {
-  flex-basis: 11%;
+  flex-basis: 225px;
   background: rgb(56, 50, 107);
   color: #ccc;
   padding: 25px 0 0 15px;
+  overflow: hidden;
+
+  &:hover {
+    overflow-y: overlay;
+    overflow-x: hidden;
+  }
 
   form h2 {
     color: #000;
@@ -87,22 +93,25 @@
 }
 
 .channel-text {
+  width: 80%;
   margin-top: 50px;
-  padding: 5px 25px 5px 5px;
+  padding: 5px 20px 5px 5px;
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+  position: relative;
 
   h2:hover, span:hover {
     cursor: pointer;
     color: #fff;
   }
-
-  span {
-    padding: 0 5px;
-  }
 }
 
 .channel-header {
   width: 100%;
+  position: fixed;
+  z-index: 2;
+  background: #fff;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
 }

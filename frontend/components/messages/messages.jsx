@@ -40,18 +40,21 @@ export class Messages extends Component {
     const { messages } = this.props;
 
     return (
-      <div className='messages'>
+      <div className='main-messages'>
         <Route path='/messages/:channelId' component={ChannelHeaderContainer} />
         
-        <h1>Messsages</h1>
-        <ul>
-          {messages.map((message, idx) => <li key={idx}>{message.content}</li>)}
-        </ul>
-        <MessageForm 
-          createMessage={this.props.createMessage} 
+        <div className="messages">
+          <ul>
+            {messages.map((message, idx) => <li key={idx}>{message.content}</li>)}
+          </ul>
+        </div>
+
+        <MessageForm
+          createMessage={this.props.createMessage}
           currentUserId={this.props.currentUser.id}
           channelId={this.channelId}
         />
+
       </div>
     )
   }
