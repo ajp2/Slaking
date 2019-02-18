@@ -42,7 +42,7 @@ export class DirectMessageForm extends Component {
     e.preventDefault();
     if (this.state.users.length === 0) return;
     const dmList = this.state.users.slice().concat(this.props.currentUser);
-    const namesList = dmList.map(user => user.username).join(', ');
+    const namesList = dmList.map(user => user.username).sort().join(', ');
 
     const existingChannel = this.channelExists(namesList);
     // DM already exists, no need to create a new one
