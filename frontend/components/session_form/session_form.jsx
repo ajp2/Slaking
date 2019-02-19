@@ -7,7 +7,7 @@ export class SessionForm extends Component {
     this.state = {
       username: "",
       password: "",
-      avatarFile: new File(["avatar"], window.default_avatar_url),
+      avatarFile: null,
       avatarUrl: window.default_avatar_url
     };
 
@@ -45,7 +45,7 @@ export class SessionForm extends Component {
       };
     } else {
       user = new FormData();
-      user.append('user[avatar]', this.state.avatarFile);
+      this.state.avatarFile ? user.append('user[avatar]', this.state.avatarFile) : false;
       user.append('user[username]', this.state.username);
       user.append('user[password]', this.state.password);
     }
