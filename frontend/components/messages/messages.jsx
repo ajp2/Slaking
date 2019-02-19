@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
-import 'emoji-mart/css/emoji-mart.css';
-import { Picker } from 'emoji-mart';
 
 import MessageForm from '../messages/message_form';
 import ChannelHeaderContainer from '../channels/channel_header_container';
@@ -59,7 +57,6 @@ export class Messages extends Component {
           currentUserId={this.props.currentUser.id}
           channelId={this.channelId}
         />
-        <Picker />
 
       </div>
     )

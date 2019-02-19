@@ -1,0 +1,1 @@
+json.extract! @emoji, :id, :content, :author_id, :message_id

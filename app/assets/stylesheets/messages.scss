@@ -14,18 +14,20 @@
     overflow-y: overlay;
     overflow-x: hidden;
   }
-  
-  ul > li {
-    padding: 10px 20px;
-
-    &:hover {
-      background: #eee;
-    }
-  }
 }
 
 .message {
   display: flex;
+  position: relative;
+  padding: 15px 20px;
+
+  &:hover {
+    background: #eee;
+
+    & .icons {
+      display: inline;
+    }
+  }
 
   img {
     width: 36px;
@@ -33,6 +35,34 @@
     margin-right: 10px;
     border-radius: 3px;
   }
+}
+
+.icons {
+  display: none;
+  position: absolute;
+  right: 50px;
+  top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  i {
+    padding: 5px 8px;
+    border-right: 1px solid #ccc;
+
+    &:last-of-type {
+      border-right: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.emoji-form {
+  position: absolute;
+  right: 70px;
+  bottom: 70px;
 }
 
 .message-container {
@@ -47,7 +77,7 @@
   display: block;
   font-size: 11px;
   color: #aaa;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
 
   .message-author {
     font-size: 14px;
