@@ -6,8 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-admin = User.create(username: "admin", email: "admin@test.com", password: "password")
-guest = User.create(username: "guest", email: "guest@test.com", password: "password123")
+admin = User.create(username: "admin", password: "password")
+admin.avatar.attach(
+  io: File.open(File.join(Rails.root, "app/assets/images/default_avatar.jpg")),
+  filename: "default_avatar.jpg"
+)
+
+guest = User.create(username: "guest", password: "password123")
+guest.avatar.attach(
+  io: File.open(File.join(Rails.root, "app/assets/images/default_avatar.jpg")),
+  filename: "default_avatar.jpg"
+)
 
 
 general = Channel.create(name: "general", description: "Chat about anything...", owner_id: admin.id)

@@ -17,11 +17,28 @@
   
   ul > li {
     padding: 10px 20px;
-    word-wrap: break-word;
 
     &:hover {
       background: #eee;
     }
+  }
+}
+
+.message {
+  display: flex;
+
+  img {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+  }
+}
+
+.message-container {
+  width: 97%;
+
+  p {
+    word-wrap: break-word;
   }
 }
 

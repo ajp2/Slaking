@@ -48,14 +48,17 @@ export class Messages extends Component {
         <div className="messages">
           <ul>
             {messages.map((message, idx) => (
-              <li key={idx}>
-                <div className="message-info">
-                  <span className='message-author'>{messageAuthor(message.author_id).username}</span>
-                  <span>{message.time}</span>
-                  <span>-</span>
-                  <span>{message.date} ago</span>
+              <li key={idx} className='message'>
+                <img src={messageAuthor(message.author_id).avatarUrl} alt="" />
+                <div className="message-container">
+                  <div className="message-info">
+                    <span className='message-author'>{messageAuthor(message.author_id).username}</span>
+                    <span>{message.time}</span>
+                    <span>-</span>
+                    <span>{message.date} ago</span>
+                  </div>
+                  <p>{message.content}</p>
                 </div>
-                {message.content}
               </li>
             ))}
           </ul>

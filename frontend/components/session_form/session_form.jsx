@@ -7,7 +7,6 @@ export class SessionForm extends Component {
     this.state = {
       username: "",
       password: "",
-      email: "",
       avatarFile: new File(["avatar"], window.default_avatar_url),
       avatarUrl: window.default_avatar_url
     };
@@ -49,7 +48,6 @@ export class SessionForm extends Component {
       user.append('user[avatar]', this.state.avatarFile);
       user.append('user[username]', this.state.username);
       user.append('user[password]', this.state.password);
-      user.append('user[email]', this.state.email);
     }
 
     this.props.processForm(user)
@@ -63,8 +61,6 @@ export class SessionForm extends Component {
   }
 
   render() {
-    console.log(this.state);
-
     const loginForm = this.props.formType === 'login';
     const fileUpload = () => (
       <div className='file-container'>
@@ -96,15 +92,6 @@ export class SessionForm extends Component {
             name="password" 
             onChange={this.handleChange} 
           />
-
-          {!loginForm ? (
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              onChange={this.handleChange}
-            />
-          ) : false}
 
           {!loginForm ? fileUpload() : false}
 
