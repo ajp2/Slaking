@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
+import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 
 import MessageForm from '../messages/message_form';
