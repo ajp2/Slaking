@@ -1,7 +1,8 @@
-class EmojisController < ApplicationController
+class Api::EmojisController < ApplicationController
   def create
     @emoji = Emoji.new(emoji_params)
     if @emoji.save
+      emoji_cable(@emoji)
       render :show
     else
       render json: @emoji.errors.full_messages, status: 422
@@ -21,5 +22,20 @@ class EmojisController < ApplicationController
   private
   def emoji_params
     params.require(:emoji).permit(:content, :author_id, :message_id)
+  end
+
+  def emoji_cable(emoji)
+    @message = emoji.message
+    ActionCable.server.broadcast(
+      "messages#{@message.channel_id}",
+      html: html(@message)
+    )
+  end
+
+  def html(message)
+    ApplicationController.render(
+      partial: 'api/messages/message',
+      locals: { message: message }
+    )
   end
 end

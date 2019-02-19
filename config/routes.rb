@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
     resources :user_channels, only: [:create]
     resources :messages, only: [:create, :index, :update, :destroy]
+    resources :emojis, only: [:create, :destroy]
   end
 
   root to: 'static_pages#root'

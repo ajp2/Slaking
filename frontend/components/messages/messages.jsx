@@ -52,7 +52,8 @@ export class Messages extends Component {
                 key={idx} 
                 message={message} 
                 messageAuthor={messageAuthor}
-                currentUserId={this.props.currentUser.id} 
+                currentUserId={this.props.currentUser.id}
+                createEmoji={this.props.createEmoji}
               />)}
           </ul>
         </div>

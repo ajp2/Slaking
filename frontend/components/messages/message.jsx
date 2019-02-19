@@ -34,7 +34,7 @@ export class Message extends Component {
       author_id: this.props.currentUserId,
       message_id: this.props.message.id
     };
-    console.log(emoji);
+    this.props.createEmoji(emoji);
   }
 
   render() {
