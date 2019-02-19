@@ -42,13 +42,7 @@ class Api::MessagesController < ApplicationController
     @message = message
     ActionCable.server.broadcast(
       "messages#{message.channel_id}",
-      html: html(message),
-      # content: message.content,
-      # id: message.id,
-      # author_id: message.author_id,
-      # channel_id: message.channel_id,
-      # time: format_time(message.created_at),
-      # # date: time_ago_in_words(message.created_at)
+      html: html(message)
     )
   end
 

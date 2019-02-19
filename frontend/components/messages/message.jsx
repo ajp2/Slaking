@@ -29,7 +29,6 @@ export class Message extends Component {
   }
 
   addEmoji(e) {
-    console.log(e);
     const emoji = {
       content: e.colons,
       author_id: this.props.currentUserId,
@@ -64,7 +63,11 @@ export class Message extends Component {
 
         {this.state.showEmojiForm ?
           <span className='emoji-form' ref={el => (this.emojiPicker = el)}>
-            <Picker onSelect={this.addEmoji} title='Pick your emoji…' emoji='point_up' />
+            <Picker 
+              onSelect={this.addEmoji} 
+              title='Pick your emoji…' 
+              emoji='point_up'
+            />
           </span>
           :
           null}
