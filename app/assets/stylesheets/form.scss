@@ -47,3 +47,29 @@
     font-size: 16px;
   }
 }
+
+.file-container {
+  width: calc(80% + 15px);
+  text-align: center;
+  margin: 25px auto;
+}
+
+.file-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  padding-left: 15px;
+
+  input {
+    border: none;
+    padding: 0;
+    padding-left: 10px;
+    font-size: 14px;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+  }
+}

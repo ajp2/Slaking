@@ -1,6 +1,7 @@
 class Api::SessionsController < ApplicationController
   def create
     username = params[:user][:username]
+    # automatically log in guest without requiring password
     password = username == "guest" ? "password123" : params[:user][:password]
     @user = User.find_by_credentials(
       username,

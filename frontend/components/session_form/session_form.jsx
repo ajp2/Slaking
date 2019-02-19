@@ -6,17 +6,33 @@ export class SessionForm extends Component {
 
     this.state = {
       username: "",
+      password: "",
       email: "",
-      password: ""
+      avatarFile: new File(["avatar"], window.default_avatar_url),
+      avatarUrl: window.default_avatar_url
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleFileChange = this.handleFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleModalClick = this.handleModalClick.bind(this);
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleFileChange(e) {
+    const file = e.currentTarget.files[0];
+    this.setState({ avatarFile: file });
+
+    const fileReader = new FileReader();
+    fileReader.onloadend = () => {
+      this.setState({ avatarUrl: fileReader.result });
+    };
+    if (file) {
+      fileReader.readAsDataURL(file);
+    }
   }
 
   handleSubmit(e) {
@@ -29,7 +45,11 @@ export class SessionForm extends Component {
         password: this.state.password
       };
     } else {
-      user = this.state;
+      user = new FormData();
+      user.append('user[avatar]', this.state.avatarFile);
+      user.append('user[username]', this.state.username);
+      user.append('user[password]', this.state.password);
+      user.append('user[email]', this.state.email);
     }
 
     this.props.processForm(user)
@@ -43,7 +63,21 @@ export class SessionForm extends Component {
   }
 
   render() {
+    console.log(this.state);
+
     const loginForm = this.props.formType === 'login';
+    const fileUpload = () => (
+      <div className='file-container'>
+        <p>Upload an avatar (optional)</p>
+        <div className="file-upload">
+          <img src={this.state.avatarUrl} alt="avatar" />
+          <input
+            type="file"
+            name="avatar"
+            onChange={this.handleFileChange} />
+        </div>
+      </div>
+    );
 
     return (
       <div className='modal' onClick={this.handleModalClick}>
@@ -56,20 +90,23 @@ export class SessionForm extends Component {
             onChange={this.handleChange} 
           />
 
-          {!loginForm ? (
-              <input 
-                type="text" 
-                placeholder="Email" 
-                name="email" 
-                onChange={this.handleChange} />
-          ) : false }
-
           <input 
             type="password" 
             placeholder="Password" 
             name="password" 
             onChange={this.handleChange} 
           />
+
+          {!loginForm ? (
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={this.handleChange}
+            />
+          ) : false}
+
+          {!loginForm ? fileUpload() : false}
 
           <button onClick={this.handleSubmit}>Submit</button>
         </form>
