@@ -32,7 +32,6 @@ export class Messages extends Component {
         received: data => {
           const res = JSON.parse(data.html);
           if (res.channel_id == this.channelId) {
-            console.log(data.html);
             this.props.receiveMessage(res);
           }
         }
@@ -48,7 +47,13 @@ export class Messages extends Component {
         
         <div className="messages">
           <ul>
-            {messages.map((message, idx) => <Message key={idx} message={message} messageAuthor={messageAuthor} />)}
+            {messages.map((message, idx) => 
+              <Message 
+                key={idx} 
+                message={message} 
+                messageAuthor={messageAuthor}
+                currentUserId={this.props.currentUser.id} 
+              />)}
           </ul>
         </div>
 

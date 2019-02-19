@@ -11,6 +11,7 @@ export class Message extends Component {
 
     this.showEmojiForm = this.showEmojiForm.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.addEmoji = this.addEmoji.bind(this);
   }
 
   showEmojiForm() {
@@ -29,6 +30,12 @@ export class Message extends Component {
 
   addEmoji(e) {
     console.log(e);
+    const emoji = {
+      content: e.colons,
+      author_id: this.props.currentUserId,
+      message_id: this.props.message.id
+    };
+    console.log(emoji);
   }
 
   render() {
