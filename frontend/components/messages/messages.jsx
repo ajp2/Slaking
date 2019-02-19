@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Route, withRouter } from 'react-router-dom';
+import { Picker } from 'emoji-mart';
 
 import MessageForm from '../messages/message_form';
 import ChannelHeaderContainer from '../channels/channel_header_container';
+import Message from './message';
 
 export class Messages extends Component {
   constructor(props) {
@@ -47,20 +49,7 @@ export class Messages extends Component {
         
         <div className="messages">
           <ul>
-            {messages.map((message, idx) => (
-              <li key={idx} className='message'>
-                <img src={messageAuthor(message.author_id).avatarUrl} alt="" />
-                <div className="message-container">
-                  <div className="message-info">
-                    <span className='message-author'>{messageAuthor(message.author_id).username}</span>
-                    <span>{message.time}</span>
-                    <span>-</span>
-                    <span>{message.date} ago</span>
-                  </div>
-                  <p>{message.content}</p>
-                </div>
-              </li>
-            ))}
+            {messages.map((message, idx) => <Message key={idx} message={message} messageAuthor={messageAuthor} />)}
           </ul>
         </div>
 
@@ -69,6 +58,7 @@ export class Messages extends Component {
           currentUserId={this.props.currentUser.id}
           channelId={this.channelId}
         />
+        <Picker />
 
       </div>
     )
