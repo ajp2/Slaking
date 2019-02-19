@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Emojis from './emojis';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 
@@ -53,6 +54,7 @@ export class Message extends Component {
             <span>{message.date} ago</span>
           </div>
           <p>{message.content}</p>
+          <Emojis emojis={message.emojis} />
         </div>
 
         <div className="icons">
