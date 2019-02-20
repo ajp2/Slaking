@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => ({
   createEmoji: emoji => createEmoji(emoji),
   deleteEmoji: id => deleteEmoji(id),
   deleteMessage: id => deleteMessage(id),
-  updateMessage: message => updateMessage(message)
+  updateMessage: (message, id) => updateMessage(message, id)
 });
 
 export default connect(mapStateToProps)(Message);

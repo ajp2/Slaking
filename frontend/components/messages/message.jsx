@@ -7,7 +7,9 @@ export class Message extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showEmojiForm: false
+      showEmojiForm: false,
+      showMessageForm: false,
+      messageContent: this.props.message.content
     };
 
     this.showEmojiForm = this.showEmojiForm.bind(this);
@@ -15,6 +17,8 @@ export class Message extends Component {
     this.addEmoji = this.addEmoji.bind(this);
     this.deleteMessage = this.deleteMessage.bind(this);
     this.editMessage = this.editMessage.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   showEmojiForm() {
@@ -42,15 +46,34 @@ export class Message extends Component {
 
   deleteMessage(e) {
     this.props.deleteMessage(this.props.message.id);
-    console.log("deleting");
   }
 
   editMessage(e) {
-    console.log("editing");
+    this.setState({ showMessageForm: true });
+  }
+
+  handleChange(e) {
+    this.setState({ messageContent: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.updateMessage({content: this.state.messageContent}, this.props.message.id)
+      .then(() => this.setState({ showMessageForm: false }));
   }
 
   render() {
     const { message, messageAuthor, currentUserId, createEmoji, deleteEmoji } = this.props;
+    const form = () => (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type='text'
+          className='edit-message-input'
+          value={this.state.messageContent}
+          onChange={this.handleChange}
+        />
+      </form>
+    );
 
     return (
       <li className='message'>
@@ -64,7 +87,10 @@ export class Message extends Component {
             <span>-</span>
             <span>{message.date} ago</span>
           </div>
-          <p>{message.content}</p>
+          {this.state.showMessageForm ? 
+            form() : 
+            <p className={`message-content-${message.id}`}>{message.content}</p>
+          }
           <Emojis 
             emojis={message.emojis} 
             messageAuthor={messageAuthor}
