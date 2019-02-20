@@ -3,7 +3,7 @@ import { Route, withRouter } from 'react-router-dom';
 
 import MessageForm from '../messages/message_form';
 import ChannelHeaderContainer from '../channels/channel_header_container';
-import Message from './message';
+import MessageContainer from './message_container';
 
 export class Messages extends Component {
   constructor(props) {
@@ -48,13 +48,7 @@ export class Messages extends Component {
         <div className="messages">
           <ul>
             {messages.map((message, idx) => 
-              <Message 
-                key={idx} 
-                message={message} 
-                messageAuthor={messageAuthor}
-                currentUserId={this.props.currentUser.id}
-                createEmoji={this.props.createEmoji}
-              />)}
+              <MessageContainer key={idx} message={message} />)}
           </ul>
         </div>
 

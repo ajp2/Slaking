@@ -39,7 +39,7 @@ export class Message extends Component {
   }
 
   render() {
-    const { message, messageAuthor, currentUserId } = this.props;
+    const { message, messageAuthor, currentUserId, createEmoji } = this.props;
 
     return (
       <li className='message'>
@@ -58,6 +58,7 @@ export class Message extends Component {
             emojis={message.emojis} 
             messageAuthor={messageAuthor}
             currentUserId={currentUserId}
+            createEmoji={createEmoji}
           />
         </div>
 
