@@ -47,9 +47,31 @@
   color: #000;
   border-radius: 5px;
 
-  .channel-detail {
-    height: 80%;
-    overflow: scroll;
+  input {
+    font-size: 14px;
+    border: 1px solid #ccc;
+    width: 85%;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    margin-right: 10px;
+
+    &:focus {
+      border: 1px solid rgb(90, 90, 255);
+      border-radius: 5px;
+    }
+  }
+
+  button {
+    padding: 5px 10px;
+    background: #ccc;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+      background: #eee;
+    }
   }
 
   h3 {
@@ -62,18 +84,14 @@
   p {
     padding: 30px 0 25px 0;
     font-weight: bold;
+    border-bottom: 1px solid #eee;
   }
 
   a {
     display: block;
     color: #000;
-    padding: 15px 0 15px 15px;
+    padding: 5px 0 5px 15px;
     text-decoration: none;
-    border-top: 1px solid #eee;
-
-    &:last-of-type {
-      border-bottom: 1px solid #eee;
-    }
   }
 
   li:hover {
@@ -90,8 +108,51 @@
   }
 }
 
+.channel-detail {
+  height: 80%;
+  padding-top: 0px;
+  overflow: hidden;
+
+  &:hover {
+    overflow-y: overlay;
+    overflow-x: hidden;
+  }
+
+  img {
+    width: 25px;
+    height: 25px;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0 10px 25px;
+    border-bottom: 1px solid #eee;
+  }
+
+  a {
+    width: 100%;
+  }
+}
+
 .all-channels-hidden {
   display: none;
+}
+
+.selected-users-list {
+  display: flex;
+  margin-top: 20px;
+
+  li {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+
+    span {
+      padding: 0;
+      padding-left: 10px;
+    }
+  }
 }
 
 .channel-text {

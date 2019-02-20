@@ -113,9 +113,11 @@ export class DirectMessageForm extends Component {
         </ul>
 
         <div className="channel-detail">
+          <p>List of users</p>
           <ul>
             {allUsers.map((user, idx) => (
               <li key={idx} onClick={() => this.handleClick(user)}>
+                <img src={user.avatarUrl} alt="avatar" />
                 <a>{user.username}</a>
               </li>
             ))}
