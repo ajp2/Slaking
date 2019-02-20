@@ -13,6 +13,8 @@ export class Message extends Component {
     this.showEmojiForm = this.showEmojiForm.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.addEmoji = this.addEmoji.bind(this);
+    this.deleteMessage = this.deleteMessage.bind(this);
+    this.editMessage = this.editMessage.bind(this);
   }
 
   showEmojiForm() {
@@ -36,6 +38,15 @@ export class Message extends Component {
       message_id: this.props.message.id
     };
     this.props.createEmoji(emoji);
+  }
+
+  deleteMessage(e) {
+    this.props.deleteMessage(this.props.message.id);
+    console.log("deleting");
+  }
+
+  editMessage(e) {
+    console.log("editing");
   }
 
   render() {
@@ -66,8 +77,8 @@ export class Message extends Component {
 
         <div className="icons">
           <i className="far fa-grin" onClick={this.showEmojiForm}></i>
-          <i className="far fa-grin"></i>
-          <i className="far fa-grin"></i>
+          <i className="far fa-edit" onClick={this.editMessage}></i>
+          <i className="fas fa-times" onClick={this.deleteMessage}></i>
         </div>
 
         {this.state.showEmojiForm ?

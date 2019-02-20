@@ -30,9 +30,13 @@ export class Messages extends Component {
       channel_room: this.channelId
     }, {
         received: data => {
-          const res = JSON.parse(data.html);
-          if (res.channel_id == this.channelId) {
-            this.props.receiveMessage(res);
+          data = data.html;
+          if (data.channel_id == this.channelId) {
+            if (data.action && data.action === 'delete') {
+              this.props.removeMessage(data.id);
+            } else {
+              this.props.receiveMessage(data);
+            }
           }
         }
       });

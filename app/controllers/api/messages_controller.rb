@@ -27,6 +27,7 @@ class Api::MessagesController < ApplicationController
     @message = Message.find(params[:id])
     if @message
       @message.destroy
+      delete_message_cable(@message)
       render json: {}
     else
       render json: ["Message does not exist"], status: 404
@@ -47,9 +48,21 @@ class Api::MessagesController < ApplicationController
   end
 
   def html(message)
-    ApplicationController.render(
+    res = ApplicationController.render(
       partial: 'api/messages/message',
       locals: { message: message }
+    )
+    JSON.parse(res)
+  end
+
+  def delete_message_cable(message)
+    ActionCable.server.broadcast(
+      "messages#{message.channel_id}",
+      html: {
+        id: message.id,
+        channel_id: message.channel_id,
+        action: 'delete'
+      }
     )
   end
 end
