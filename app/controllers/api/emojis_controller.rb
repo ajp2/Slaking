@@ -13,6 +13,7 @@ class Api::EmojisController < ApplicationController
     @emoji = Emoji.find(params[:id])
     if @emoji
       @emoji.destroy
+      emoji_cable(@emoji)
       render json: {}
     else
       render json: ["No emoji found with that id"]

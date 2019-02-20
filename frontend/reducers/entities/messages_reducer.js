@@ -13,7 +13,9 @@ const messagesReducer = (state = {}, action) => {
     case RECEIVE_MESSAGES:
       return action.messages;
     case RECEIVE_MESSAGE:
-      return merge({}, state, { [action.message.id]: action.message });
+      newState = merge({}, state, { [action.message.id]: action.message });
+      newState[action.message.id].emojis = merge({}, action.message.emojis);
+      return newState;
     case REMOVE_MESSAGE:
       newState = merge({}, state);
       delete newState[action.id];

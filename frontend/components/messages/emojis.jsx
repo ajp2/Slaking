@@ -35,12 +35,21 @@ export class Emojis extends Component {
 
   toggleEmoji(emoji) {
     if (emoji.author_ids.includes(this.props.currentUserId)) {
-      console.log(emoji);
+      const foundEmoji = Object.values(this.props.emojis).filter(currentEmoji => (
+        currentEmoji.content === emoji.content && currentEmoji.author_id === this.props.currentUserId
+      ));
+      this.props.deleteEmoji(foundEmoji[0].id);
     } else {
-      console.log("adding emoji");
-      
+      const newEmoji = {
+        content: emoji.content,
+        author_id: this.props.currentUserId,
+        message_id: this.props.messageId
+      };
+      this.props.createEmoji(newEmoji);
     }
   }
+
+
 
   render() {
     if (!this.props.emojis) return null;
