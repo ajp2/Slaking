@@ -45,11 +45,15 @@ export class Message extends Component {
   }
 
   deleteMessage(e) {
-    this.props.deleteMessage(this.props.message.id);
+    if (this.props.message.author_id === this.props.currentUserId) {
+      this.props.deleteMessage(this.props.message.id);
+    }
   }
 
   editMessage(e) {
-    this.setState({ showMessageForm: true });
+    if (this.props.message.author_id === this.props.currentUserId) {
+      this.setState({ showMessageForm: true });
+    }
   }
 
   handleChange(e) {
