@@ -39,7 +39,7 @@ export class Message extends Component {
   }
 
   render() {
-    const { message, messageAuthor } = this.props;
+    const { message, messageAuthor, currentUserId } = this.props;
 
     return (
       <li className='message'>
@@ -54,7 +54,11 @@ export class Message extends Component {
             <span>{message.date} ago</span>
           </div>
           <p>{message.content}</p>
-          <Emojis emojis={message.emojis} />
+          <Emojis 
+            emojis={message.emojis} 
+            messageAuthor={messageAuthor}
+            currentUserId={currentUserId}
+          />
         </div>
 
         <div className="icons">
