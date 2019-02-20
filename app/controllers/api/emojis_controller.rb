@@ -1,4 +1,6 @@
 class Api::EmojisController < ApplicationController
+  before_action :require_logged_in
+  
   def create
     @emoji = Emoji.new(emoji_params)
     if @emoji.save
