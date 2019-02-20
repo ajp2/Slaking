@@ -9,7 +9,10 @@ export class Emojis extends Component {
     return (
       <div className='emoji-bar'>
         {emojis.map(emoji => 
-          <Emoji size={16} emoji={emoji.content} key={emoji.id} />
+          <span className='emoji-item'>
+            <Emoji size={16} emoji={emoji.content} key={emoji.id} />
+            <span className='emoji-num'>1</span>
+          </span>
           )}
       </div>
     )

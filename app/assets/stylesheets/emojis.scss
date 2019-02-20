@@ -1,0 +1,27 @@
+@import 'variables';
+
+.emoji-bar {
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.emoji-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2px;
+  padding: 2px 4px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid $primary-color;
+  }
+}
+
+.emoji-num {
+  font-size: 11px;
+  padding-left: 4px;
+  color: rgb(128, 123, 123);
+}
