@@ -33,15 +33,23 @@ export class Emojis extends Component {
     return usernames.join(', ') + ' reacted with ' + emoji.content;
   }
 
+  toggleEmoji(emoji) {
+    if (emoji.author_ids.includes(this.props.currentUserId)) {
+      console.log(emoji);
+    } else {
+      console.log("adding emoji");
+      
+    }
+  }
+
   render() {
     if (!this.props.emojis) return null;
     const emojis = this.formatEmojis(this.props.emojis);
-    console.log(emojis);
     
     return (
       <div className='emoji-bar'>
         {emojis.map(emoji => 
-          <span className='emoji-item' key={emoji.id} data-title={this.formatEmojiText(emoji)}>
+          <span className='emoji-item' onClick={() => this.toggleEmoji(emoji)} key={emoji.id} data-title={this.formatEmojiText(emoji)}>
             <Emoji size={16} emoji={emoji.content} />
             <span className='emoji-num'>{emoji.frequency}</span>
           </span>
