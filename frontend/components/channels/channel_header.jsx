@@ -56,6 +56,7 @@ export class ChannelHeader extends Component {
 
   editChannel() {
     this.setState({ editing: true });
+    this.setState({ description: this.props.channel.description });
   }
 
   handleChange(e) {
