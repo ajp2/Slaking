@@ -60,7 +60,6 @@ export class ChannelList extends Component {
     
     return (
       <div>
-
         <div className="channel-list">
           <div className='channel-text'>
             <h2 onClick={e => this.toggleModal(channelType)}>{channelText}</h2>

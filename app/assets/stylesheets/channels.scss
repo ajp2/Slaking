@@ -186,12 +186,11 @@
     display: inline-block;
     font-size: 14px;
     margin-top: 0.5%;
-    margin-left: 20px;
     padding: 5px 25px;
 
     &:hover {
       cursor: pointer;
-      border: 1px solid #eee;
+      border: 1px solid #ccc;
       border-radius: 5px;
     }
   }
@@ -238,5 +237,72 @@
   &:hover {
     cursor: pointer;
     color: #ccc;
+  }
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:hover .dropdown {
+    display: block;
+  }
+
+  .img-container {
+    background: #fff;
+    border-radius: 5px;
+    width: 36px;
+    height: 36px;
+  }
+
+  img {
+    width: 36px;
+    height: 36px;
+    border-radius: 5px;
+  }
+
+  h2 {
+    margin-left: 20px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #ccc;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 35px;
+    left: 40px;
+    display: none;
+    background: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 2;
+
+    &:hover {
+      display: block;
+    }
+
+    li {
+      padding: 10px 30px;
+      
+      &:hover {
+        background: #eee;
+      }
+    }
   }
 }

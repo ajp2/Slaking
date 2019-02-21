@@ -22,7 +22,7 @@ export class Channels extends Component {
         received: data => {
           if (data.action && data.action === 'delete') {
             this.props.history.push('/messages/1');
-            this.props.removeUserChannel(this.props.currentUserId, data.id);
+            this.props.removeUserChannel(this.props.currentUser.id, data.id);
             this.props.removeChannel(data.id);
           } else {
             this.props.receiveChannel(data);
@@ -42,6 +42,21 @@ export class Channels extends Component {
     return (
       <div className='chat'>
         <section className="channels">
+
+          <div className="user-profile">
+            <div className="img-container">
+              <img src={this.props.currentUser.avatarUrl} alt="avatar" />
+            </div>
+            <h2>{this.props.currentUser.username}</h2>
+            <span class="arrow-down"></span>
+
+            <div className="dropdown">
+              <ul>
+                <li>Edit Profile</li>
+                <li>Logout</li>
+              </ul>
+            </div>
+          </div>
 
           <ChannelListContainer channelType='public' channels={publicChannels} />
           <ChannelListContainer channelType='private' channels={privateChannels} />

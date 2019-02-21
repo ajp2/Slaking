@@ -8,7 +8,7 @@ import { selectAllChannels, selectUserChannels } from '../../reducers/selectors'
 const mapStateToProps = state => ({
   channels: selectAllChannels(state),
   userChannels: selectUserChannels(state, state.session.id),
-  currentUserId: state.session.id
+  currentUser: state.entities.users[state.session.id]
 });
 
 const mapDispatchToProps = dispatch => ({
