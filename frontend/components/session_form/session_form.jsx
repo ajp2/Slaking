@@ -56,6 +56,7 @@ export class SessionForm extends Component {
 
   handleModalClick(e) {
     if (e.target.classList[0] === 'modal') {
+      this.props.clearErrors();
       this.props.history.push('/');
     }
   }
@@ -79,6 +80,12 @@ export class SessionForm extends Component {
       <div className='modal' onClick={this.handleModalClick}>
         <form className='form'>
           <h2>{loginForm ? 'Log in' : 'Sign Up'}</h2>
+          {this.props.errors ? (
+            <ul>
+              {this.props.errors.map((err, idx) => <li key={idx}>{err}</li>)}
+            </ul>
+          ) : false}
+
           <input 
             type="text"
             placeholder="Username" 
