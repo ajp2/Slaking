@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { log } from 'util';
 
 export class ChannelHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showSettings: false
+      showSettings: false,
+      description: this.props.channel.description || 'Add a description',
+      editing: false
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.deleteChannel = this.deleteChannel.bind(this);
     this.leaveChannel = this.leaveChannel.bind(this);
+    this.editChannel = this.editChannel.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleClick() {
@@ -48,13 +54,39 @@ export class ChannelHeader extends Component {
     }
   }
 
+  editChannel() {
+    this.setState({ editing: true });
+  }
+
+  handleChange(e) {
+    this.setState({ description: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    
+  }
+
   render() {
     const channel_name = this.formatName(this.props.channel.name);
+    const editForm = () => (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type='text'
+          value={this.state.description}
+          onChange={this.handleChange}
+        />
+      </form>
+    )
 
     return (
       <div className='channel-header'>
         <h2># {channel_name}</h2>
-        <p>{this.props.channel.description}</p>
+        {this.state.editing ? 
+          <input type='text' value={this.state.description} />
+          :
+          <p className='description' onClick={this.editChannel}>{this.state.description}</p>
+        }
 
         <i className="fas fa-cog settings-dropdown" onClick={this.handleClick} ref={el => (this.settings = el)}></i>
           
