@@ -23,7 +23,9 @@ export class AllChannels extends Component {
     const joinedChannels = this.props.channels.filter(channel => (
       channel_ids.includes(channel.id) && !channel.private
     ));
-    const otherChannels = this.props.channels.filter(channel => !channel_ids.includes(channel.id));    
+    const otherChannels = this.props.channels.filter(channel => 
+      !channel_ids.includes(channel.id) && !channel.private
+    );
     
     return (
       <div className='all-channels'>

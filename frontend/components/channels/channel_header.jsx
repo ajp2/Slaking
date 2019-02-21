@@ -24,10 +24,18 @@ export class ChannelHeader extends Component {
     }
   }
 
+  formatName(name) {
+    if (this.props.channelType === 'public') return name;
+    let formattedName = name.split(', ').filter(username => username !== this.props.currentUser.username);
+    return formattedName.join(', ');
+  }
+
   render() {
+    const channel_name = this.formatName(this.props.channel.name);
+
     return (
       <div className='channel-header'>
-        <h2># {this.props.channel.name}</h2>
+        <h2># {channel_name}</h2>
         <p>{this.props.channel.description}</p>
 
         <i className="fas fa-cog settings-dropdown" onClick={this.handleClick} ref={el => (this.settings = el)}></i>
