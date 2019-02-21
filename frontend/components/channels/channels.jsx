@@ -7,6 +7,8 @@ import MessagesContainer from '../messages/messages_container';
 export class Channels extends Component {
   constructor(props) {
     super(props);
+
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +33,11 @@ export class Channels extends Component {
       });
   }
 
+  logout() {
+    this.props.logout();
+    this.props.history.push('/');
+  }
+
   render() {
     const { channels, userChannels } = this.props;
     if (channels && channels.length === 0) return null;
@@ -52,8 +59,7 @@ export class Channels extends Component {
 
             <div className="dropdown">
               <ul>
-                <li>Edit Profile</li>
-                <li>Logout</li>
+                <li onClick={this.logout}>Logout</li>
               </ul>
             </div>
           </div>

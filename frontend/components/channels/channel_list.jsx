@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import ChannelFormContainer from './channel_form_container';
 import DirectMessageContainer from './direct_message_container';
@@ -66,7 +66,13 @@ export class ChannelList extends Component {
             <span onClick={e => this.toggleModal(formName)}>+</span>
           </div>
           <ul>
-            {channels.map((channel, idx) => <li key={idx}><Link to={`/messages/${channel.id}`}># {this.formatName(channel.name)}</Link></li>)}
+            {channels.map((channel, idx) =>   
+              <li key={idx}>
+                <NavLink to={`/messages/${channel.id}`} activeStyle={{ color: '#fff' }}>
+                  # {this.formatName(channel.name)}
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
 

@@ -37,18 +37,18 @@ export const fetchCurrentUser = () => (dispatch, getState) => (
 
 export const login = formUser => dispatch => SessionAPIUtil.login(formUser)
   .then(
-    user => dispatch(receiveCurrentUser(user),
-    err => dispatch(receiveErrors(err.responseJSON)))
+    user => dispatch(receiveCurrentUser(user)),
+    err => dispatch(receiveErrors(err.responseJSON))
   );
 
 export const signup = formUser => dispatch => SessionAPIUtil.signup(formUser)
   .then(
-    user => dispatch(receiveCurrentUser(user),
+    user => dispatch(receiveCurrentUser(user)),
     err => dispatch(receiveErrors(err.responseJSON))
-  ));
+  );
 
 export const logout = () => dispatch => SessionAPIUtil.logout()
   .then(
-    () => dispatch(logoutCurrentUser(),
+    () => dispatch(logoutCurrentUser()),
     err => dispatch(receiveErrors(err.responseJSON))
-  ));
+  );
