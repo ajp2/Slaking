@@ -34,4 +34,12 @@ export const createUserChannel = userChannel => (
     url: '/api/user_channels',
     data: { userChannel }
   })
-)
+);
+
+export const deleteUserChannel = (userId, channelId) => (
+  $.ajax({
+    method: 'GET',
+    url: '/api/user_channels/find_and_destroy',
+    data: { userId, channelId }
+  })
+);

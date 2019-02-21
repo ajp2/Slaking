@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :users, only: [:create, :index, :show]
     resource :session, only: [:create, :destroy]
-    resources :channels, only: [:create, :index, :update, :destroy] do
-      resources :user_channels, only: [:destroy]
-    end
+    resources :channels, only: [:create, :index, :update, :destroy]
+
     resources :user_channels, only: [:create]
+    get 'user_channels/find_and_destroy', to: 'user_channels#find_and_destroy'
+    
     resources :messages, only: [:create, :index, :update, :destroy]
     resources :emojis, only: [:create, :destroy]
   end

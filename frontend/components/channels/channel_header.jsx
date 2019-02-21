@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 export class ChannelHeader extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export class ChannelHeader extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
     this.deleteChannel = this.deleteChannel.bind(this);
+    this.leaveChannel = this.leaveChannel.bind(this);
   }
 
   handleClick() {
@@ -31,8 +33,18 @@ export class ChannelHeader extends Component {
   }
 
   deleteChannel() {
-    if (this.props.channel.owner_id === this.props.currentUser.id) {
+    // Can delete any channels user has created (not the general channel) or any DMs
+    if ((this.props.channel.owner_id === this.props.currentUser.id &&
+          this.props.channel.name !== 'general') || this.props.channel.private) {
       this.props.deleteChannel(this.props.channel.id);
+    }
+  }
+
+  leaveChannel() {
+    // Cannot leave the general channel or any DMs
+    if (this.props.channel.name !== 'general' && !this.props.channel.private) {
+      this.props.deleteUserChannel(this.props.currentUser.id, this.props.channel.id);
+      this.props.history.push('/messages');
     }
   }
 
@@ -48,7 +60,7 @@ export class ChannelHeader extends Component {
           
         {this.state.showSettings ?
           <div className="header-settings">
-            <a>Leave Channel</a>
+            <a onClick={this.leaveChannel}>Leave Channel</a>
             <a onClick={this.deleteChannel}>Delete Channel</a>
           </div>
           : null}
@@ -57,4 +69,4 @@ export class ChannelHeader extends Component {
   }
 }
 
-export default ChannelHeader;
+export default withRouter(ChannelHeader);

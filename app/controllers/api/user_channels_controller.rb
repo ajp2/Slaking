@@ -10,9 +10,9 @@ class Api::UserChannelsController < ApplicationController
     end
   end
 
-  def destroy
-    # channel id or id?
-    @user_channel = UserChannel.where(user_id: params[:currentUser], channel_id: params[:channel_id])
+  def find_and_destroy
+    @user_channel = UserChannel.where("user_id = ? AND channel_id = ?", params[:userId], params[:channelId]).first
+    puts @user_channel
     if @user_channel
       @user_channel.destroy
       render json: {}

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import ChannelHeader from './channel_header';
 import { deleteChannel } from '../../util/channel_api_util';
+import { deleteUserChannel } from '../../actions/channel_actions';
 
 const mapStateToProps = (state, ownProps) => ({
   channel: state.entities.channels[ownProps.match.params.channelId],
@@ -8,7 +9,11 @@ const mapStateToProps = (state, ownProps) => ({
   deleteChannel: id => deleteChannel(id)
 });
 
+const mapDispatchToProps = dispatch => ({
+  deleteUserChannel: (userId, channelId) => dispatch(deleteUserChannel(userId, channelId))
+});
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ChannelHeader);
