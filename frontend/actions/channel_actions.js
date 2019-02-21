@@ -27,6 +27,12 @@ export const receiveUserChannel = userChannel => ({
   userChannel
 });
 
+export const removeUserChannel = (userId, channelId) => ({
+  type: REMOVE_USER_CHANNEL,
+  userId,
+  channelId
+})
+
 export const fetchChannels = () => dispatch => ChannelAPIUtil.fetchChannels()
   .then(channels => dispatch(receiveChannels(channels)));
 

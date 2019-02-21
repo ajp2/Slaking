@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Redirect } from 'react-router-dom';
 
 import ChannelListContainer from './channel_list_container';
 import MessagesContainer from '../messages/messages_container';
@@ -19,7 +19,15 @@ export class Channels extends Component {
     this.socket = App.cable.subscriptions.create({
       channel: 'ThreadsChannel'
     }, {
-        received: data => this.props.receiveChannel(data),
+        received: data => {
+          if (data.action && data.action === 'delete') {
+            this.props.history.push('/messages/1');
+            this.props.removeUserChannel(this.props.currentUserId, data.id);
+            this.props.removeChannel(data.id);
+          } else {
+            this.props.receiveChannel(data);
+          }
+        }
       });
   }
 

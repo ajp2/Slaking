@@ -29,6 +29,7 @@ class Api::ChannelsController < ApplicationController
     @channel = Channel.find(params[:id])
     if @channel
       @channel.destroy
+      delete_channel_cable(@channel)
       render json: {}
     else
       render json: ["Channel does not exist"], status: 404
@@ -48,6 +49,14 @@ class Api::ChannelsController < ApplicationController
       description: channel.description,
       private: channel.private,
       owner_id: channel.owner_id
+    )
+  end
+
+  def delete_channel_cable(channel)
+    ActionCable.server.broadcast(
+      "threads",
+      id: channel.id,
+      action: 'delete'
     )
   end
 end

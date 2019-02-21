@@ -9,11 +9,11 @@ export class ChannelHeader extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
+    this.deleteChannel = this.deleteChannel.bind(this);
   }
 
   handleClick() {
     this.setState({ showSettings: true }, () => document.addEventListener('click', this.closeMenu));
-    console.log(this.state);
   }
 
   closeMenu(e) {
@@ -25,9 +25,15 @@ export class ChannelHeader extends Component {
   }
 
   formatName(name) {
-    if (this.props.channelType === 'public') return name;
+    if (!this.props.channel.private) return name;
     let formattedName = name.split(', ').filter(username => username !== this.props.currentUser.username);
     return formattedName.join(', ');
+  }
+
+  deleteChannel() {
+    if (this.props.channel.owner_id === this.props.currentUser.id) {
+      this.props.deleteChannel(this.props.channel.id);
+    }
   }
 
   render() {
@@ -39,11 +45,11 @@ export class ChannelHeader extends Component {
         <p>{this.props.channel.description}</p>
 
         <i className="fas fa-cog settings-dropdown" onClick={this.handleClick} ref={el => (this.settings = el)}></i>
-          {this.state.showSettings ? 
+          
+        {this.state.showSettings ?
           <div className="header-settings">
-            <a>Edit Channel</a>
             <a>Leave Channel</a>
-            <a>Delete Channel</a>
+            <a onClick={this.deleteChannel}>Delete Channel</a>
           </div>
           : null}
       </div>
