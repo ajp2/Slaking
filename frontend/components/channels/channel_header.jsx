@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { log } from 'util';
 
 export class ChannelHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showSettings: false,
-      description: this.props.channel.description || 'Add a description',
+      description: this.props.channel.description,
       editing: false
     };
 
@@ -32,6 +31,7 @@ export class ChannelHeader extends Component {
     }
   }
 
+  // Removes current user's name from DM
   formatName(name) {
     if (!this.props.channel.private) return name;
     let formattedName = name.split(', ').filter(username => username !== this.props.currentUser.username);
@@ -64,7 +64,8 @@ export class ChannelHeader extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    
+    this.props.editChannel({ description: this.state.description }, this.props.channel.id);
+    this.setState({ editing: false });
   }
 
   render() {
@@ -83,9 +84,9 @@ export class ChannelHeader extends Component {
       <div className='channel-header'>
         <h2># {channel_name}</h2>
         {this.state.editing ? 
-          <input type='text' value={this.state.description} />
+          editForm()
           :
-          <p className='description' onClick={this.editChannel}>{this.state.description}</p>
+          <p className='description' onClick={this.editChannel}>{this.props.channel.description || 'Add a description'}</p>
         }
 
         <i className="fas fa-cog settings-dropdown" onClick={this.handleClick} ref={el => (this.settings = el)}></i>
