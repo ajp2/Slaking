@@ -81,7 +81,7 @@ export class SessionForm extends Component {
         <form className='form'>
           <h2>{loginForm ? 'Log in' : 'Sign Up'}</h2>
           {this.props.errors ? (
-            <ul>
+            <ul className='form-errors'>
               {this.props.errors.map((err, idx) => <li key={idx}>{err}</li>)}
             </ul>
           ) : false}

@@ -1,5 +1,3 @@
-@import 'variables';
-
 .home {
   height: 100vh;
   background: url('main.jpg');
@@ -44,12 +42,12 @@
 .logo a {
   font-size: 36px;
   font-weight: bold;
-  color: $logo-color;
+  color: rgb(59, 193, 255);
   text-decoration: none;
   border: none;
 
   &:hover {
-    color: $logo-color;
+    color: rgb(59, 193, 255);
     border: none;
   }
 }
@@ -74,7 +72,7 @@
   }
 
   .inline-logo {
-    color: $logo-color;
+    color: rgb(59, 193, 255);
   }
 
   button {
