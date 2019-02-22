@@ -261,7 +261,6 @@
 .user-profile {
   display: flex;
   align-items: center;
-  padding-left: 15px;
   padding-bottom: 20px;
   position: relative;
 
@@ -287,15 +286,16 @@
   }
 
   h2 {
+    width: 100px;
     margin-left: 20px;
-    margin-right: 10px;
-    font-size: 20px;
+    margin-right: 0px;
+    font-size: 16px;
     font-weight: bold;
   }
 
   .arrow-down {
     width: 0; 
-    height: 0; 
+    height: 0;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 6px solid #ccc;
