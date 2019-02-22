@@ -49,7 +49,7 @@ export class Message extends Component {
       this.props.deleteMessage(this.props.message.id);
     } else {
       this.props.receiveMessageErrors('You do not have permission to do that');
-      setTimeout(this.props.clearMessageErrors, 3000);
+      setTimeout(this.props.clearMessageErrors, 2000);
     }
   }
 
@@ -58,7 +58,7 @@ export class Message extends Component {
       this.setState({ showMessageForm: true });
     } else {
       this.props.receiveMessageErrors('You do not have permission to do that');
-      setTimeout(this.props.clearMessageErrors, 3000);
+      setTimeout(this.props.clearMessageErrors, 2000);
     }
   }
 

@@ -7,7 +7,8 @@ const mapStateToProps = (state, ownProps) => ({
   channel: state.entities.channels[ownProps.match.params.channelId],
   currentUser: state.entities.users[state.session.id],
   deleteChannel: id => deleteChannel(id),
-  editChannel: (channel, id) => editChannel(channel, id)
+  editChannel: (channel, id) => editChannel(channel, id),
+  errors: state.errors.messageErrors.concat(state.errors.channelErrors)
 });
 
 const mapDispatchToProps = dispatch => ({

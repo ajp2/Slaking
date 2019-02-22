@@ -207,6 +207,22 @@
   }
 }
 
+.errors-list {
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  color: #f00;
+  border: 1px solid #f00;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+
+  li {
+    padding-bottom: 5px;
+  }
+}
+
 .header-settings {
   position: absolute;
   top: 60px;

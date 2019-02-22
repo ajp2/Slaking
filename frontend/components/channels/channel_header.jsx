@@ -45,7 +45,7 @@ export class ChannelHeader extends Component {
       this.props.deleteChannel(this.props.channel.id);
     } else {
       this.props.receiveChannelErrors('You do not have permission to do that');
-      setTimeout(this.props.clearChannelErrors, 3000);
+      setTimeout(this.props.clearChannelErrors, 2000);
     }
   }
 
@@ -56,7 +56,7 @@ export class ChannelHeader extends Component {
       this.props.history.push('/messages');
     } else {
       this.props.receiveChannelErrors('You cannot leave this channel');
-      setTimeout(this.props.clearChannelErrors, 3000);
+      setTimeout(this.props.clearChannelErrors, 2000);
     }
   }
 
@@ -104,6 +104,12 @@ export class ChannelHeader extends Component {
             <a onClick={this.deleteChannel}>Delete Channel</a>
           </div>
           : null}
+
+          {this.props.errors.length > 0 ? (
+            <ul className='errors-list'>
+              {this.props.errors.map((err, idx) => <li key={idx}>{err}</li>)}
+            </ul>
+          ) : false}
       </div>
     )
   }
