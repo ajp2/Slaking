@@ -43,6 +43,9 @@ export class ChannelHeader extends Component {
     if ((this.props.channel.owner_id === this.props.currentUser.id &&
           this.props.channel.name !== 'general') || this.props.channel.private) {
       this.props.deleteChannel(this.props.channel.id);
+    } else {
+      this.props.receiveChannelErrors('You do not have permission to do that');
+      setTimeout(this.props.clearChannelErrors, 3000);
     }
   }
 
@@ -51,6 +54,9 @@ export class ChannelHeader extends Component {
     if (this.props.channel.name !== 'general' && !this.props.channel.private) {
       this.props.deleteUserChannel(this.props.currentUser.id, this.props.channel.id);
       this.props.history.push('/messages');
+    } else {
+      this.props.receiveChannelErrors('You cannot leave this channel');
+      setTimeout(this.props.clearChannelErrors, 3000);
     }
   }
 
