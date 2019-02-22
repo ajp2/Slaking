@@ -47,12 +47,18 @@ export class Message extends Component {
   deleteMessage(e) {
     if (this.props.message.author_id === this.props.currentUserId) {
       this.props.deleteMessage(this.props.message.id);
+    } else {
+      this.props.receiveMessageErrors('You do not have permission to do that');
+      setTimeout(this.props.clearMessageErrors, 3000);
     }
   }
 
   editMessage(e) {
     if (this.props.message.author_id === this.props.currentUserId) {
       this.setState({ showMessageForm: true });
+    } else {
+      this.props.receiveMessageErrors('You do not have permission to do that');
+      setTimeout(this.props.clearMessageErrors, 3000);
     }
   }
 

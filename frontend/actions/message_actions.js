@@ -3,6 +3,8 @@ import * as MessageAPIUtil from '../util/message_api_util';
 export const RECEIVE_MESSAGES = 'RECEIVE_MESSAGES';
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE';
+export const RECEIVE_MESSAGE_ERRORS = 'RECEIVE_MESSAGE_ERRORS';
+export const CLEAR_MESSAGE_ERRORS = 'CLEAR_MESSAGE_ERRORS';
 
 export const receiveMessages = messages => ({
   type: RECEIVE_MESSAGES,
@@ -19,14 +21,23 @@ export const removeMessage = id => ({
   id
 });
 
+export const receiveMessageErrors = errors => ({
+  type: RECEIVE_MESSAGE_ERRORS,
+  errors
+});
+
+export const clearMessageErrors = () => ({
+  type: CLEAR_MESSAGE_ERRORS
+});
+
 export const fetchMessages = channelId => dispatch => MessageAPIUtil.fetchMessages(channelId)
   .then(messages => dispatch(receiveMessages(messages)));
 
 // export const createMessage = formMessage => dispatch => MessageAPIUtil.createMessage(formMessage)
 //   .then(message => dispatch(receiveMessage(message)));
 
-export const updateMessage = (formMessage, id) => dispatch => MessageAPIUtil.updateMessage(formMessage, id)
-  .then(message => dispatch(receiveMessage(message)));
+// export const updateMessage = (formMessage, id) => dispatch => MessageAPIUtil.updateMessage(formMessage, id)
+//   .then(message => dispatch(receiveMessage(message)));
 
-export const deleteMessage = id => dispatch => MessageAPIUtil.deleteMessage(id)
-  .then(() => dispatch(removeMessage(id)));
+// export const deleteMessage = id => dispatch => MessageAPIUtil.deleteMessage(id)
+//   .then(() => dispatch(removeMessage(id)));
