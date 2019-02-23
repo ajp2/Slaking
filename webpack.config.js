@@ -17,7 +17,7 @@ plugins = plugins.concat(
 );
 
 module.exports = {
-  entry: "./frontend/slacking.jsx",
+  entry: "./frontend/slaking.jsx",
   output: {
     path: path.resolve(__dirname, "app", "assets", "javascripts"),
     filename: "bundle.js"
