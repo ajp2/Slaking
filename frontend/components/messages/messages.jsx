@@ -30,17 +30,19 @@ export class Messages extends Component {
       channel_room: this.channelId
     }, {
         received: data => {
-          data = data.html;
+          let message;
           try {
-            data = JSON.parse(data);
+            message = JSON.parse(data.html);
           } catch(e) {
-            data = data;
+            message = data.html;
           }
-          if (data.channel_id == this.channelId) {
-            if (data.action && data.action === 'delete') {
-              this.props.removeMessage(data.id);
+          // Only modify state if user is in relevant channel
+          if (message.channel_id == this.channelId) {
+            // Add/remove message from state based on incoming data
+            if (message.action && message.action === 'delete') {
+              this.props.removeMessage(message.id);
             } else {
-              this.props.receiveMessage(data);
+              this.props.receiveMessage(message);
             }
           }
         }
