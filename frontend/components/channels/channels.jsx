@@ -17,17 +17,30 @@ export class Channels extends Component {
     this.createSocket();
   }
 
+  // Broadcasts any channels created, edited, or deleted
   createSocket() {
     this.socket = App.cable.subscriptions.create({
       channel: 'ThreadsChannel'
     }, {
         received: data => {
           if (data.action && data.action === 'delete') {
+            // Redirects and removes channel, userChannel from state
             this.props.history.push('/messages/1');
             this.props.removeUserChannel(this.props.currentUser.id, data.id);
             this.props.removeChannel(data.id);
           } else {
             this.props.receiveChannel(data);
+            // dispatch userChannel if channel is DM sent to current user; skip if already exists
+            if (data.private && 
+              data.name.split(', ').includes(this.props.currentUser.username) &&
+              !this.props.currentUser.channel_ids.includes(data.id)) {
+                const userChannel = {
+                  user_id: this.props.currentUser.id,
+                  channel_id: data.id
+                };
+                this.props.receiveUserChannel(userChannel);
+            }
+
           }
         }
       });
@@ -55,7 +68,7 @@ export class Channels extends Component {
               <img src={this.props.currentUser.avatarUrl} alt="avatar" />
             </div>
             <h2>{this.props.currentUser.username}</h2>
-            <span class="arrow-down"></span>
+            <span className="arrow-down"></span>
 
             <div className="dropdown">
               <ul>

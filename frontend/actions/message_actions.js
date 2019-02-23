@@ -32,12 +32,3 @@ export const clearMessageErrors = () => ({
 
 export const fetchMessages = channelId => dispatch => MessageAPIUtil.fetchMessages(channelId)
   .then(messages => dispatch(receiveMessages(messages)));
-
-// export const createMessage = formMessage => dispatch => MessageAPIUtil.createMessage(formMessage)
-//   .then(message => dispatch(receiveMessage(message)));
-
-// export const updateMessage = (formMessage, id) => dispatch => MessageAPIUtil.updateMessage(formMessage, id)
-//   .then(message => dispatch(receiveMessage(message)));
-
-// export const deleteMessage = id => dispatch => MessageAPIUtil.deleteMessage(id)
-//   .then(() => dispatch(removeMessage(id)));

@@ -48,17 +48,8 @@ export const clearChannelErrors = () => ({
 export const fetchChannels = () => dispatch => ChannelAPIUtil.fetchChannels()
   .then(channels => dispatch(receiveChannels(channels)));
 
-// export const createChannel = formChannel => dispatch => ChannelAPIUtil.createChannel(formChannel)
-//   .then(channel => dispatch(receiveChannel(channel)));
-
-// export const editChannel = (formChannel, id) => dispatch => ChannelAPIUtil.editChannel(formChannel, id)
-//   .then(channel => dispatch(receiveChannel(channel)));
-
-// export const deleteChannel = id => dispatch => ChannelAPIUtil.deleteChannel(id)
-//   .then(() => dispatch(deleteChannel(id)));
-
 export const createUserChannel = formUserChannel => dispatch => ChannelAPIUtil.createUserChannel(formUserChannel)
   .then(userChannel => dispatch(receiveUserChannel(userChannel)));
 
-export const deleteUserChannel = (userId, channelId) => dispatch => ChannelAPIUtil.deleteUserChannel(userId, channelId);
-  // .then(userChannel => dispatch(receiveUserChannel(userChannel)));
+export const deleteUserChannel = (userId, channelId) => dispatch => ChannelAPIUtil.deleteUserChannel(userId, channelId)
+  .then(userChannel => dispatch(removeUserChannel(userId, channelId)));

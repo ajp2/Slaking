@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import DirectMessage from './direct_message';
-import { createUserChannel } from '../../actions/channel_actions';
-import { createChannel } from '../../util/channel_api_util';
+import { createChannel, createUserChannel } from '../../util/channel_api_util';
 import { selectAllChannels } from '../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -9,14 +8,10 @@ const mapStateToProps = (state, ownProps) => ({
   currentUser: state.entities.users[state.session.id],
   allUsers: state.entities.users,
   createChannel: channel => createChannel(channel),
-  allChannels: selectAllChannels(state)
-});
-
-const mapDispatchToProps = dispatch => ({
-  createUserChannel: userChannel => dispatch(createUserChannel(userChannel))
+  allChannels: selectAllChannels(state),
+  createUserChannel: userChannel => createUserChannel(userChannel)
 });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(DirectMessage);

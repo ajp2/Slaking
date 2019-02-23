@@ -24,6 +24,7 @@ export class ChannelForm extends Component {
       owner_id: this.props.currentUserId
     };
 
+    // creates and adds user to channel
     this.props.createChannel(channel)
       .then(res => {
         const userChannel = {
@@ -31,7 +32,7 @@ export class ChannelForm extends Component {
           channel_id: res.id
         };
         this.props.createUserChannel(userChannel);
-
+        
         this.setState({ name: "", description: "", existingChannel: res }, this.props.closeModal);
       });
   }

@@ -1,14 +1,10 @@
 import { connect } from 'react-redux';
 import ChannelList from './channel_list';
 import { 
-  fetchChannels, 
   receiveChannel, 
-  editChannel, 
-  deleteChannel ,
   createUserChannel
 } from '../../actions/channel_actions';
-import { fetchUsers, fetchCurrentUser } from '../../actions/session_actions';
-import { selectAllChannels, selectUserChannels } from '../../reducers/selectors';
+import { selectAllChannels } from '../../reducers/selectors';
 
 const mapStateToProps = (state, ownProps) => ({
   allChannels: selectAllChannels(state),

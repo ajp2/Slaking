@@ -25,6 +25,7 @@ export class ChannelList extends Component {
     this.setState({ [name]: !this.state[name] });
   }
 
+  // Remove current user's name from DM name
   formatName(name) {
     if (this.props.channelType === 'public') return name;
     let formattedName = name.split(', ').filter(username => username !== this.props.currentUser.username);

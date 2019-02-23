@@ -23,6 +23,7 @@ export class ChannelHeader extends Component {
     this.setState({ showSettings: true }, () => document.addEventListener('click', this.closeMenu));
   }
 
+  // closes channel settings dropdown
   closeMenu(e) {
     if (this.settings !== null && !this.settings.contains(e.target)) {
       this.setState({
@@ -31,7 +32,7 @@ export class ChannelHeader extends Component {
     }
   }
 
-  // Removes current user's name from DM
+  // Removes current user's name from list of names in DM
   formatName(name) {
     if (!this.props.channel.private) return name;
     let formattedName = name.split(', ').filter(username => username !== this.props.currentUser.username);

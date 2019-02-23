@@ -45,12 +45,11 @@ export class DirectMessageForm extends Component {
     const namesList = dmList.map(user => user.username).sort().join(', ');
 
     const existingChannel = this.channelExists(namesList);
-    // DM already exists, no need to create a new one
+    // DM already exists, no need to create a new one; set state to redirect
     if (existingChannel) {
-      this.setState({ existingChannel: existingChannel }, this.props.closeModal);
+      this.setState({ existingChannel }, this.props.closeModal);
     } else {
-
-      // else statement needed to stop function executing
+      // create channel and user channel (for each person in DM)
       const channel = {
         name: namesList,
         description: `Members: ${namesList}`,
@@ -68,7 +67,7 @@ export class DirectMessageForm extends Component {
             this.props.createUserChannel(userChannel);
           });
 
-          this.setState({ search: "", users: [] });
+          this.setState({ search: "", users: [], existingChannel: res });
           this.props.closeModal();
         });
 
