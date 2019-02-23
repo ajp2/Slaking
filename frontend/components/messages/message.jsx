@@ -88,7 +88,9 @@ export class Message extends Component {
     return (
       <li className='message'>
 
-        <img src={messageAuthor(message.author_id).avatarUrl} alt="" />
+        <div className="avatar-img">
+          <img src={messageAuthor(message.author_id).avatarUrl} alt="" />
+        </div>
 
         <div className="message-container">
           <div className="message-info">
