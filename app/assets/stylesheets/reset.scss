@@ -55,10 +55,14 @@ input {
 
 // Scrollbar
 
-.messages::-webkit-scrollbar, .channels::-webkit-scrollbar {
+.messages::-webkit-scrollbar, 
+.channels::-webkit-scrollbar,
+.channel-detail::-webkit-scrollbar {
     width: 8px;
 }
  
-.messages::-webkit-scrollbar-thumb, .channels::-webkit-scrollbar-thumb {
+.messages::-webkit-scrollbar-thumb, 
+.channels::-webkit-scrollbar-thumb,
+.channel-detail::-webkit-scrollbar-thumb {
   background-color: #ccc;;
 }

@@ -46,8 +46,10 @@
   position: relative;
   z-index: 2;
   padding: 25px;
+  padding-bottom: 50px;
   color: #000;
   border-radius: 5px;
+  overflow: hidden;
 
   input {
     font-size: 14px;
