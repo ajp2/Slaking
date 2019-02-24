@@ -22,38 +22,38 @@ star_wars = Channel.create(name: "Star Wars", description: "Discuss any Star War
 # Users
 homer = User.create(username: "Homer Simpson", password: "password123")
 homer.avatar.attach(
-  io: File.open(File.join(Rails.root, "app/assets/images/avatars/homer.jpg")),
+  io: File.open("app/assets/images/avatars/homer.jpg"),
   filename: "homer.jpg"
 )
 marge = User.create(username: "Marge Simpson", password: "password123")
 marge.avatar.attach(
-  io: File.open(File.join(Rails.root, "app/assets/images/avatars/marge.jpg")),
+  io: File.open("app/assets/images/avatars/marge.jpg"),
   filename: "marge.jpg"
 )
 bart = User.create(username: "Bart Simpson", password: "password123")
 bart.avatar.attach(
-  io: File.open(File.join(Rails.root, "app/assets/images/avatars/bart.png")),
+  io: File.open("app/assets/images/avatars/bart.png"),
   filename: "bart.png"
 )
 lisa = User.create(username: "Lisa Simpson", password: "password123")
 lisa.avatar.attach(
-  io: File.open(File.join(Rails.root, "app/assets/images/avatars/lisa.jpg")),
+  io: File.open("app/assets/images/avatars/lisa.jpg"),
   filename: "lisa.jpg"
 )
 
 yoda = User.create(username: "Yoda", password: "password123")
 yoda.avatar.attach(
-  io: File.open(File.join(Rails.root, "app/assets/images/avatars/yoda.jpg")),
+  io: File.open("app/assets/images/avatars/yoda.jpg"),
   filename: "yoda.jpg"
 )
 darthvader = User.create(username: "Darth Vader", password: "password123")
 darthvader.avatar.attach(
-  io: File.open(File.join(Rails.root, "app/assets/images/avatars/vader.jpeg")),
+  io: File.open("app/assets/images/avatars/vader.jpeg"),
   filename: "vader.jpeg"
 )
 luke = User.create(username: "Luke Skywalker", password: "password123")
 luke.avatar.attach(
-  io: File.open(File.join(Rails.root, "app/assets/images/avatars/luke.jpg")),
+  io: File.open("app/assets/images/avatars/luke.jpg"),
   filename: "luke.jpg"
 )
 
