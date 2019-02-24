@@ -81,8 +81,14 @@ export class Channels extends Component {
           <ChannelListContainer channelType='private' channels={privateChannels} />
 
         </section>
+        
+        {console.log(this.props.currentUser.channel_ids)}
+        {this.props.currentUser.channel_ids.includes(Number(this.props.match.params.channelId)) ? (
+          <Route path='/messages/:channelId' component={MessagesContainer} />
+        ) : (
+          <Redirect to='/messages/1' />
+        )}
 
-        <Route path='/messages/:channelId' component={MessagesContainer} />
 
       </div>
     )

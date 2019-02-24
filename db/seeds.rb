@@ -100,7 +100,7 @@ Message.create(content: "There's a lot more to it than that, Bart. I don't just 
 Message.create(content: "I’m like that guy who single-handedly built the rocket & flew to the moon. What was his name? Apollo Creed?", author_id: homer.id, channel_id: simpsons.id)
 Message.create(content: "Lord help me, I’m just not that bright", author_id: homer.id, channel_id: simpsons.id)
 Message.create(content: "Bart, with $10,000, we’d be millionaires! We could buy all kinds of useful things like…love!", author_id: homer.id, channel_id: simpsons.id)
-Message.create(content: "I Thought Dabbling in the Black Arts Would Be Good for a Chuckle. How Wrong I Was", author_id: bart.id, channel_id: simpsons.id)
+Message.create(content: "I thought dabbling in the black arts would be good for a chuckle. How wrong I was", author_id: bart.id, channel_id: simpsons.id)
 Message.create(content: "All my life I've had one dream, to achieve my many goals", author_id: homer.id, channel_id: simpsons.id)
 Message.create(content: "Kids, you tried your best and you failed miserably. The lesson is, never try", author_id: homer.id, channel_id: simpsons.id)
 Message.create(content: "Shut up, brain! I've got friends now. I don't need you anymore.", author_id: lisa.id, channel_id: simpsons.id)
