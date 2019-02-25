@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route, Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 import ChannelListContainer from './channel_list_container';
 import MessagesContainer from '../messages/messages_container';

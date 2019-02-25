@@ -38,6 +38,7 @@ export class ChannelList extends Component {
     const channelText = publicChannel ? 'Channels' : 'Direct Message';
     const formName = publicChannel ? 'publicForm' : 'private';
 
+    // Modal creators
     const channelModal = () => (
       <div className="modal" onClick={e => this.handleModalClick(e, 'public')}>
         <AllChannels
@@ -61,6 +62,7 @@ export class ChannelList extends Component {
     
     return (
       <div>
+        
         <div className="channel-list">
           <div className='channel-text'>
             <h2 onClick={e => this.toggleModal(channelType)}>{channelText}</h2>
@@ -76,7 +78,6 @@ export class ChannelList extends Component {
             )}
           </ul>
         </div>
-
 
         {/* List of all channels (opens modal) */}
         {this.state.public ?  channelModal() : null}

@@ -43,6 +43,7 @@ export class ChannelHeader extends Component {
       });
   }
 
+  // Temporarily adds DM notification to state
   notifyDM(message) {
     const user = this.props.messageAuthor(message.author_id);
     this.props.receiveNotification(`You have received a DM from ${user.username}`);

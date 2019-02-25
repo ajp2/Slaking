@@ -6,6 +6,7 @@ import configureStore from './store/store';
 document.addEventListener('DOMContentLoaded', () => {
   let store;
   
+  // Bootstrap current user
   if (window.currentUser) {
     const preloadedState = {
       entities: {

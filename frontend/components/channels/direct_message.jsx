@@ -34,6 +34,7 @@ export class DirectMessageForm extends Component {
     this.setState({ users: newUsers });
   }
 
+  // If channel exists with the given name, return it
   channelExists(name) {
     return this.props.allChannels.find(channel => channel.name === name);
   }
@@ -41,6 +42,8 @@ export class DirectMessageForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.users.length === 0) return;
+
+    // Format list of usernames
     const dmList = this.state.users.slice().concat(this.props.currentUser);
     const namesList = dmList.map(user => user.username).sort().join(', ');
 
@@ -49,6 +52,7 @@ export class DirectMessageForm extends Component {
     if (existingChannel) {
       this.setState({ existingChannel }, this.props.closeModal);
     } else {
+      
       // create channel and user channel (for each person in DM)
       const channel = {
         name: namesList,
