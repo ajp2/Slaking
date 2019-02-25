@@ -7,8 +7,7 @@ export class ChannelHeader extends Component {
     this.state = {
       showSettings: false,
       description: this.props.channel.description,
-      editing: false,
-      dmReceived: false
+      editing: false
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -34,20 +33,20 @@ export class ChannelHeader extends Component {
       channel: 'MessageAlertChannel'
     }, {
         received: data => {
-          console.log(data);
           const foundChannel = this.props.findChannel(data.html.channel_id);
           if (foundChannel.private && 
               this.props.currentUser.channel_ids.includes(foundChannel.id) &&
-              foundChannel.owner_id !== this.props.currentUser.id) {
-                this.notifyDM();
-                this.setState({ dmReceived: true });
+              data.html.author_id !== this.props.currentUser.id) {
+                this.notifyDM(data.html);
           }
         }
       });
   }
 
-  notifyDM() {
-    console.log("dm received");
+  notifyDM(message) {
+    const user = this.props.messageAuthor(message.author_id);
+    this.props.receiveNotification(`You have received a DM from ${user.username}`);
+    setTimeout(this.props.clearNotifications, 3000);
   }
 
   handleClick() {
@@ -138,10 +137,15 @@ export class ChannelHeader extends Component {
           : null}
 
           {this.props.errors.length > 0 ? (
-            <ul className='errors-list'>
+            <ul className='notification errors-list'>
               {this.props.errors.map((err, idx) => <li key={idx}>{err}</li>)}
             </ul>
           ) : false}
+        {this.props.notifications.length > 0 ? (
+          <ul className='notification receive-dm-list'>
+            {this.props.notifications.map((note, idx) => <li key={idx}>{note}</li>)}
+          </ul>
+        ) : false}
       </div>
     )
   }

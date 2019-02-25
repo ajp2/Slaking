@@ -210,12 +210,10 @@
   }
 }
 
-.errors-list {
+.notification {
   position: absolute;
   top: 30%;
   left: 40%;
-  color: #f00;
-  border: 1px solid #f00;
   border-radius: 5px;
   padding: 10px;
   font-size: 14px;
@@ -224,6 +222,16 @@
   li {
     padding-bottom: 5px;
   }
+}
+
+.errors-list {
+  color: #f00;
+  border: 1px solid #f00;
+}
+
+.receive-dm-list {
+  color: rgb(2, 128, 2);
+  border: 1px solid rgb(2, 128, 2);
 }
 
 .header-settings {

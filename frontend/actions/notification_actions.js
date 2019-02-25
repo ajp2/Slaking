@@ -6,6 +6,6 @@ export const receiveNotification = notification => ({
   notification
 });
 
-export const clearNotificatoins = () => ({
+export const clearNotifications = () => ({
   type: CLEAR_NOTIFICATIONS
 });
