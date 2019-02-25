@@ -66,3 +66,24 @@ input {
 .channel-detail::-webkit-scrollbar-thumb {
   background-color: #ccc;;
 }
+
+// Loader
+
+.loader {
+	position: fixed;
+	z-index: 3;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: none;
+
+	img {
+		width: 150px;
+		border: none;
+	}
+}

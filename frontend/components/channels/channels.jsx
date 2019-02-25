@@ -61,6 +61,14 @@ export class Channels extends Component {
 
     return (
       <div className='chat'>
+
+        {/* Loading spinner */}
+        {this.props.loading ? (
+          <div className="loader">
+            <img src={spinner_img} alt="Loading..."/>
+          </div>
+        ) : null}
+
         <section className="channels">
 
           <div className="user-profile">
