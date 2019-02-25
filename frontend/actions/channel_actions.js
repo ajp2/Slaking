@@ -3,7 +3,6 @@ import * as ChannelAPIUtil from '../util/channel_api_util';
 export const RECEIVE_CHANNELS = 'RECEIVE_CHANNELS';
 export const RECEIVE_CHANNEL = 'RECEIVE_CHANNEL';
 export const REMOVE_CHANNEL = 'REMOVE_CHANNEL';
-export const START_LOADING_ALL_CHANNELS = 'START_LOADING_ALL_CHANNELS';
 
 export const RECEIVE_USER_CHANNEL = 'RECEIVE_USER_CHANNEL';
 export const REMOVE_USER_CHANNEL = 'REMOVE_USER_CHANNEL';
@@ -46,12 +45,7 @@ export const clearChannelErrors = () => ({
   type: CLEAR_CHANNEL_ERRORS
 });
 
-export const startLoadingAllChannels = () => ({
-  type: START_LOADING_ALL_CHANNELS
-});
-
 export const fetchChannels = () => dispatch => {
-  dispatch(startLoadingAllChannels());
   return ChannelAPIUtil.fetchChannels()
     .then(channels => dispatch(receiveChannels(channels)));
 };
