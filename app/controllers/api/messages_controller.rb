@@ -13,7 +13,7 @@ class Api::MessagesController < ApplicationController
   end
 
   def index
-    @messages = Message.where(channel_id: params[:channelId])
+    @messages = Message.where(channel_id: params[:channelId]).includes(:emojis)
     render :index
   end
 
