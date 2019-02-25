@@ -53,8 +53,11 @@ export class Channels extends Component {
 
   render() {
     const { channels, userChannels } = this.props;
-    if (channels && channels.length === 0) return null;
-    if (!userChannels) return null;
+    if ((channels && channels.length === 0) || !userChannels) return (
+      <div className="loader">
+        <img src={spinner_img} alt="Loading..." />
+      </div>
+    );
 
     const publicChannels = userChannels.filter(channel => !channel.private);
     const privateChannels = userChannels.filter(channel => channel.private);
