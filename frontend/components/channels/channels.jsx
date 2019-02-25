@@ -82,7 +82,6 @@ export class Channels extends Component {
 
         </section>
         
-        {console.log(this.props.currentUser.channel_ids)}
         {this.props.currentUser.channel_ids.includes(Number(this.props.match.params.channelId)) ? (
           <Route path='/messages/:channelId' component={MessagesContainer} />
         ) : (

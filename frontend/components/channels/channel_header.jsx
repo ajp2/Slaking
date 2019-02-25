@@ -7,7 +7,8 @@ export class ChannelHeader extends Component {
     this.state = {
       showSettings: false,
       description: this.props.channel.description,
-      editing: false
+      editing: false,
+      dmReceived: false
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -17,6 +18,36 @@ export class ChannelHeader extends Component {
     this.editChannel = this.editChannel.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.createSocket();
+  }
+
+  componentDidUpdate() {
+    this.createSocket();
+  }
+
+  // Socket used to display notification of DM received
+  createSocket() {
+    this.socket = App.cable.subscriptions.create({
+      channel: 'MessageAlertChannel'
+    }, {
+        received: data => {
+          console.log(data);
+          const foundChannel = this.props.findChannel(data.html.channel_id);
+          if (foundChannel.private && 
+              this.props.currentUser.channel_ids.includes(foundChannel.id) &&
+              foundChannel.owner_id !== this.props.currentUser.id) {
+                this.notifyDM();
+                this.setState({ dmReceived: true });
+          }
+        }
+      });
+  }
+
+  notifyDM() {
+    console.log("dm received");
   }
 
   handleClick() {

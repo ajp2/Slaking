@@ -5,6 +5,7 @@ class Api::MessagesController < ApplicationController
     @message = Message.new(message_params)
     if @message.save
       message_cable(@message)
+      message_cable(@message, "message_alert")
       render :show
     else
       render json: @message.errors.full_messages, status: 422
@@ -42,10 +43,11 @@ class Api::MessagesController < ApplicationController
     params.require(:message).permit(:content, :author_id, :channel_id)
   end
 
-  def message_cable(message)
+  def message_cable(message, broadcast_channel = nil)
+    broadcast_channel = "messages#{message.channel_id}" if broadcast_channel.nil?
     @message = message
     ActionCable.server.broadcast(
-      "messages#{message.channel_id}",
+      broadcast_channel,
       html: html(message)
     )
   end
