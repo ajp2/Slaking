@@ -45,7 +45,6 @@ class Api::MessagesController < ApplicationController
 
   def message_cable(message, broadcast_channel = nil)
     broadcast_channel = "messages#{message.channel_id}" if broadcast_channel.nil?
-    @message = message
     ActionCable.server.broadcast(
       broadcast_channel,
       html: html(message)

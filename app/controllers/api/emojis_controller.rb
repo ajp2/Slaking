@@ -36,9 +36,10 @@ class Api::EmojisController < ApplicationController
   end
 
   def html(message)
-    ApplicationController.render(
+    res = ApplicationController.render(
       partial: 'api/messages/message',
       locals: { message: message }
     )
+    JSON.parse(res)
   end
 end
