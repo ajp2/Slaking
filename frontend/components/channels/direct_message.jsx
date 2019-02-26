@@ -79,7 +79,7 @@ export class DirectMessageForm extends Component {
   }
 
   filterResults(allUsers) {
-    return allUsers.filter(user => user.username.includes(this.state.search));
+    return allUsers.filter(user => user.username.toLowerCase().includes(this.state.search.toLowerCase()));
   }
 
   render() {
