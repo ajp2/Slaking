@@ -7,6 +7,7 @@
 ## Features
 
 ### Real Time Messaging
+
 Users are subscribed to a websocket connection whenever they log on. When another user makes a CRUD action on a channel or message, the change is broadcast to all connected users.
 
 ```
@@ -34,6 +35,7 @@ end
 The client receives the change, and dispatches a corresponding redux action to change the state. React re-renders, and the change will be displayed without having to reload the page.
 
 ### Channels
+
 Users can create channels or direct messages. Both are saved as a Channel in the database, where only the `private` boolean field differs. Users and channels have a many-to-many relationship and are connected throught a `user_channels` join table.
 
 ```
@@ -48,6 +50,7 @@ The redux state loads messages only for the channel the user is currently viewin
 ![Direct Message](/docs/screenshots/direct-message.png)
 
 ### Profile Pictures
+
 Users can upload a profile picture upon registration. A default image is assigned if they choose not to. Once the sign up form has been submitted, Rails will create a new user and check if it has an included image, and if not, it will attach a chosen default image, and then save the user to the databse. The image is hosted on AWS S3.
 
 ```
@@ -78,8 +81,8 @@ after_commit :add_default_avatar
 def add_default_avatar
   unless self.avatar.attached?
     self.avatar.attach(
-      io: File.open("app/assets/images/default_avatar.jpg")), 
-      filename: 'default_avatar.jpg', 
+      io: File.open("app/assets/images/default_avatar.jpg")),
+      filename: 'default_avatar.jpg',
       content_type: "image/jpg"
     )
   end
@@ -87,26 +90,29 @@ end
 ```
 
 ## Technologies Used
-* Ruby on Rails
-* JavaScript
-* React
-* React Router
-* Redux
-* jQuery
-* PostgeSQL
-* AWS S3
-* BCrypt
-* Websocket (Rails Action Cable)
-* Webpack, Babel
+
+- Ruby on Rails
+- JavaScript
+- React
+- React Router
+- Redux
+- jQuery
+- PostgeSQL
+- AWS S3
+- BCrypt
+- Websocket (Rails Action Cable)
+- Webpack, Babel
 
 ## Project Design
+
 Various [documents](https://github.com/ajp2/Slaking/wiki) were created before the project began to plan and design what the end product would include and what it would look like.
 
-These included a minimum viable product list, a sample database schema, a sample redux state, and the frontend and backend routes.
+These included a minimum viable product list, a sample database schema, a sample redux state, and the frontend and backend routes. [Wireframes](docs/wireframes) were also created.
 
 ## Possible Features to Add
-* Multiple workspaces
-* Search all messages
-* Edit and view user profile (and view other users profiles)
-* Pinned and starred messages
-* Message threads
+
+- Multiple workspaces
+- Search all messages
+- Edit and view user profile (and view other users profiles)
+- Pinned and starred messages
+- Message threads
