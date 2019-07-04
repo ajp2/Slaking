@@ -89,6 +89,16 @@ def add_default_avatar
 end
 ```
 
+## Challenges
+
+- Using web sockets in production
+  - The web socket functionality worked in development but not after the application was deployed
+  - I ended up having to change the Action Cable config file to set the adapter to Postgres
+  - In development the async adapter is used by default but it cannot be used in production
+- Adding other users messages to the relevant channel
+  - The real time messaging feature caused messages to appear on the current channel the user was currently viewing, rather than only showing it on the channel on which it was sent
+  - The solution was to restrict the Action Cable broadcast to the given channel. Only users subscribed to that channel would see the new messagess
+
 ## Technologies Used
 
 - Ruby on Rails
